@@ -10,14 +10,14 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
-  type = "button",
+  type = "submit",
   className = "",
 }) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`w-full bg-customBlue text-white py-2 rounded-md transition-colors ${className}`}
+      className={`w-full bg-customBlue text-white font-inter py-2 rounded-md transition-colors ${className}`}
     >
       {children}
     </button>

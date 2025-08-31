@@ -9,9 +9,9 @@ interface FormWrapperProps {
 
 const FormWrapper: React.FC<FormWrapperProps> = ({ children, title, logoSrc }) => {
   return (
-    <div className="w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-10 p-6 bg-white border border-neutral-60 rounded-lg">
+    <div className="max-w-sm mx-auto mt-10 p-6 bg-white border border-neutral-60 rounded-lg">
       {title && (
-        <div className="flex items-center justify-center mb-6 gap-1">
+        <div className="flex items-center justify-center mb-4 gap-1">
           {logoSrc && (
             <img src={logoSrc} alt="Logo" className="h-11 w-auto" />
           )}

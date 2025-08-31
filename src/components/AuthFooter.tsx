@@ -13,7 +13,7 @@ const AuthFooter: React.FC<AuthFooterProps> = ({
   actionLink,
 }) => {
   return (
-    <div className="text-center mt-8 text-sm text-gray-600 font-inter mb-14">
+    <div className="text-center mt-8 text-sm text-gray-600 font-inter mb-12">
       {promptText}{" "}
       <Link
         to={actionLink}

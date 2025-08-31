@@ -10,14 +10,14 @@ const TabSwitcher = ({ activeTab }) => {
   ];
 
   return (
-    <div className="flex justify-center mb-6 space-x-2">
+    <div className="flex justify-center mb-3 space-x-2">
       {tabs.map((tab) => {
         const isActive = activeTab === tab.label;
         return (
           <button
             key={tab.label}
             onClick={() => navigate(tab.route)}
-            className={`px-16 py-2 rounded-md font-semibold transition-colors ${
+            className={`px-12 py-2 rounded-md font-semibold transition-colors ${
               isActive
                 ? 'bg-[#5795c2] text-white font-inter text-sm'
                 : 'bg-transparent text-gray-700 hover:bg-gray-200 font-inter text-sm'
