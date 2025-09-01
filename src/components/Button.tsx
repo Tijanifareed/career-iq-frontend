@@ -1,31 +1,3 @@
-// import React from "react";
-
-// interface ButtonProps {
-//   onClick?: () => void;
-//   children: React.ReactNode;
-//   type?: "button" | "submit" | "reset";
-//   className?: string;
-// }
-
-// const Button: React.FC<ButtonProps> = ({
-//   onClick,
-//   children,
-//   type = "submit",
-//   className = "",
-// }) => {
-//   return (
-//     <button
-//       type={type}
-//       onClick={onClick}
-//       className={`w-full bg-customBlue text-white font-inter py-2 rounded-md transition-colors ${className}`}
-//     >
-//       {children}
-//     </button>
-//   );
-// };
-
-// export default Button;
-
 
 import React from "react";
 
@@ -35,6 +7,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   className?: string;
   loading?: boolean; // ✅ new prop
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -43,14 +16,15 @@ const Button: React.FC<ButtonProps> = ({
   type = "submit",
   className = "",
   loading = false,
+  disabled = false,
 }) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      disabled={loading} // prevent double clicks
+      disabled={disabled || loading} 
       className={`w-full bg-customBlue text-white font-inter py-2 rounded-md flex justify-center items-center gap-2 transition-colors ${className} ${
-        loading ? "opacity-70 cursor-not-allowed" : ""
+         disabled || loading ? "opacity-70 cursor-not-allowed" : ""
       }`}
     >
       {loading && (

@@ -1,4 +1,4 @@
-import api from "./api"; // your axios instance
+import api from "./api"; 
 
 export const saveUserTimezone = async (timezoneCode: string) => {
   const res = await api.post("/auth/add-timezone", { timezone: timezoneCode });
