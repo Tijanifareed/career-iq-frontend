@@ -8,15 +8,60 @@ import AuthFooter from "../../components/AuthFooter";
 import TermsAndPrivacy from "../../components/TermsAndPrivacy";
 import DividerWithText from "../../components/DividerWithText";
 import GoogleSignInButton from "../../components/GoogleSignInButton";
+import { loginUser } from "../../apis/authService";
+import FeedbackModal from "../../components/FeedbackModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
+  const [modalType, setModalType] = useState<"success" | "error">("success");
+  const [nextRoute, setNextRoute] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const navigate = useNavigate();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("FORM SUBMITTED ✅");
-    console.log({ email, password });
+    if(!email || !password) return;
+    
+    setLoading(true);
+    // console.log("FORM SUBMITTED ✅");
+    // console.log({ email, password });
+
+    
+
+    try{
+      const data = await loginUser(email, password);
+      // console.log("Login successful:", data);
+
+
+      setModalType("success");
+      setModalMessage(data.message || "Account login successfully");
+
+      const route = data.data?.timezone ? "/dashboard" : "/timezone";
+      setNextRoute(route);
+      if (data.data?.token) {
+        localStorage.setItem("token", data.data.token);
+      }
+    } catch (err: any){
+      const message = 
+      err.response?.data?.message||
+      err.message||
+      "Login Failed";
+      setModalType("error");
+      setModalMessage(message);
+    }finally {
+      setLoading(false);
+    }
+  };
+
+  const handleModalClose = () => {
+    setModalMessage(null);
+    if (modalType === "success" && nextRoute) {
+      navigate(nextRoute); 
+    }
   };
 
   return (
@@ -42,11 +87,13 @@ export default function Login() {
             label="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            showForgotPassword={true}   // ✅ shows the link
+            showForgotPassword={true}  
             forgotPasswordUrl="/forgot-password"
           />
 
-          <Button type="submit">Login</Button>
+          <Button type="submit" loading={loading}>
+            {loading ? "Signing up..." : "Login"}
+            </Button>
         </form>
          <DividerWithText text="Or" />
           <GoogleSignInButton onClick={() => console.log("Google Sign-In clicked")} />
@@ -59,7 +106,13 @@ export default function Login() {
           className="mt-3"
         />
       </FormWrapper>
-
+      {modalMessage && (
+        <FeedbackModal
+          type={modalType}
+          message={modalMessage}
+          onClose={handleModalClose}
+        />
+      )}
     </div>
   );
 }

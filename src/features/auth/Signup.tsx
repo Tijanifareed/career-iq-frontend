@@ -8,17 +8,62 @@ import AuthFooter from "../../components/AuthFooter";
 import TermsAndPrivacy from "../../components/TermsAndPrivacy";
 import DividerWithText from "../../components/DividerWithText";
 import GoogleSignInButton from "../../components/GoogleSignInButton";
+import { signupUser } from "../../apis/authService";
+import FeedbackModal from "../../components/FeedbackModal";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
+  const [modalType, setModalType] = useState<"success" | "error">("success");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+  var timezone = "";
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+
     console.log("FORM SUBMITTED ✅");
-    console.log({ email, password, name });
+    console.log({ email, password, username });
+    if (!email || !password || !username) {
+      setLoading(false);
+     return;
+    }
+
+    try {
+      const data = await signupUser({ username, email, password });
+      console.log("Signup successful:", data);
+      setModalType("success");
+      console.log(data.data.timezone)
+      timezone = data.data.timezone
+      setModalMessage(data.message || "Account created successfully");
+      // Redirect to login or dashboard
+    } catch (err: any) {
+      const message =
+        err.response?.data?.detail ||
+        err.response?.data?.message ||
+        err.message ||
+        "Signup failed";
+      setModalType("error");
+      setModalMessage(message);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleModalClose = () => {
+    setModalMessage(null);
+    if (timezone === null) {
+      navigate("/timezone"); 
+  };
+}
+
+
   return (
     <div>
       <FormWrapper title="CareerIQ" logoSrc="/public/logo.png">
@@ -33,8 +78,8 @@ export default function Signup() {
           <InputField
             label="Name"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
             placeholder="Enter your name"
           />
           <InputField
@@ -50,19 +95,29 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             showForgotPassword={false}   // ✅ hides the link
           />
-          <Button type="submit">SignUp</Button>
+          {/* <Button type="submit">SignUp</Button> */}
+          <Button type="submit" loading={loading}>
+            {/* SignUp */}
+            {loading ? "Signing up..." : "Sign Up"}
+          </Button>
         </form>
-         <DividerWithText text="Or" />
-         <GoogleSignInButton onClick={() => console.log("Google Sign-In clicked")} />
+        <DividerWithText text="Or" />
+        <GoogleSignInButton onClick={() => console.log("Google Sign-In clicked")} />
 
         <AuthFooter
           promptText="Have an account?"
           actionText="Sign in"
           actionLink="/login"
         />
-        <TermsAndPrivacy className="mt-3" />   
+        <TermsAndPrivacy className="mt-3" />
       </FormWrapper>
-
+      {modalMessage && (
+        <FeedbackModal
+          type={modalType}
+          message={modalMessage}
+          onClose={handleModalClose}
+        />
+      )}
 
     </div>
   );
