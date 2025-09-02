@@ -1,7 +1,7 @@
 
 // pages/DashboardMobile.tsx
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import StatCard from "../../components/StatCard";
 import ActivityItem from "../../components/ActivityItem";
 import {
@@ -108,49 +108,44 @@ export default function DashboardMobile() {
 
       {/* Bottom Nav */}
       <div className="fixed bottom-0 w-full bg-white border-t flex justify-around py-2">
-        <NavItem
-          label="Dashboard"
-          icon={<FaHome />}
-          onClick={() => navigate("/dashboard")}
-          pageIndexColor="text-customBlue"
-        />
-        <NavItem
-          label="Applications"
-          icon={<FaFileAlt />}
-          onClick={() => navigate("/applications")}
-        />
-        <NavItem
-          label="Resume AI"
-          icon={<FaRobot />}
-          onClick={() => navigate("/resume-ai")}
-        />
-        <NavItem
-          label="Interview"
-          icon={<FaComments />}
-          onClick={() => navigate("/interview")}
-        />
+        <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" />
+        <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" />
+        <NavItem label="Resume AI" icon={<FaRobot />} to="/resume-ai" />
+        <NavItem label="Interview" icon={<FaComments />} to="/interview" />
+
       </div>
     </div>
   );
 }
 
+
+
+
 function NavItem({
   label,
   icon,
-  onClick,
-  pageIndexColor,
+  to,
 }: {
   label: string;
   icon: React.ReactNode;
-  onClick: () => void;
-  pageIndexColor?: string;
+  to: string;
 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if this nav item is active
+  const isActive = location.pathname.startsWith(to);
+
   return (
     <button
-      onClick={onClick}
-      className={`flex flex-col items-center  ${pageIndexColor} text-sm`}
+      onClick={() => navigate(to)}
+      className={`flex flex-col items-center text-sm ${
+        isActive ? "text-customBlue" : "text-gray-600"
+      }`}
     >
-      <div className={`text-lg ${pageIndexColor}`}>{icon}</div>
+      <div className={`text-lg ${isActive ? "text-customBlue" : ""}`}>
+        {icon}
+      </div>
       <span>{label}</span>
     </button>
   );
