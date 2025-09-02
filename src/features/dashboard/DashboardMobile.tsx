@@ -171,24 +171,28 @@ export default function DashboardMobile() {
           count={loading ? "..." : stats?.applied ?? 0}
           icon={<FaClipboardList />}
           className="p-6"
+          iconColor="text-customBlue"
         />
         <StatCard
           title="Interview"
           count={loading ? "..." : stats?.interview ?? 0}
           icon={<FaPaperPlane />}
           className="p-6"
+          iconColor="text-orange-300"
         />
         <StatCard
           title="Offer"
           count={loading ? "..." : stats?.offer ?? 0}
           icon={<FaCheckCircle />}
           className="p-6"
+          iconColor="text-green-300"
         />
         <StatCard
           title="Rejected"
           count={loading ? "..." : stats?.rejected ?? 0}
           icon={<FaTimesCircle />}
           className="p-6"
+          iconColor="text-red-400"
         />
       </div>
 

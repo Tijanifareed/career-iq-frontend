@@ -66,7 +66,7 @@ export default function Signup() {
 
   return (
     <div>
-      <FormWrapper title="CareerIQ" logoSrc="/public/logo.png">
+      <FormWrapper title="CareerIQ" logoSrc="/logo.png">
         <h2 className="text-2xl font-bold font-inter text-black text-center mb-1">
           Welcome to CareerIQ
         </h2>
