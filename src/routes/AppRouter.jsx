@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "../features/auth/Signup"; // can leave placeholder for now
-import Dashboard from "../features/dashboard/Dashboard"; // placeholder
+import DashboardPage from "../features/dashboard/Dashboard"; // placeholder
 import Login from "../features/auth/Login";
 import Timezone from "../features/timezone/Timezone"; 
 
@@ -11,7 +11,7 @@ export default function AppRouter() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/timezone" element={<Timezone />} />
       </Routes>
     </BrowserRouter>
