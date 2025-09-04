@@ -197,13 +197,13 @@ export default function DashboardWeb() {
       <div className="flex-1 flex flex-col pl-64">
         {/* Sticky Navbar */}
         <div className="sticky top-0 z-20 flex justify-end items-center px-6 py-2 bg-white border-b shadow-sm">
-          <div className="relative">
+          {/* <div className="relative">
             <input
               type="search"
               placeholder="Search applications..."
               className="px-3 py-2 border rounded-md w-72 focus:outline-none"
             />
-          </div>
+          </div> */}
 
           <button
             onClick={() => navigate("/profile")}

@@ -4,6 +4,7 @@ import DashboardPage from "../features/dashboard/Dashboard"; // placeholder
 import Login from "../features/auth/Login";
 import Timezone from "../features/timezone/Timezone"; 
 import ApplicationsPage from "../features/applications/Applications"
+import AddApplicationPage from "../features/applications/AddApplication"
 
 export default function AppRouter() {
   return (
@@ -15,6 +16,7 @@ export default function AppRouter() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/timezone" element={<Timezone />} />
         <Route path="/applications" element={<ApplicationsPage />} />
+        <Route path="/applications/new" element={<AddApplicationPage />}/>
 
       </Routes>
     </BrowserRouter>
