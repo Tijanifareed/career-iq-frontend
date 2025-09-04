@@ -1,0 +1,187 @@
+// import React, { useState } from "react";
+// import Sidebar from "../../components/Sidebar";
+// import { useApplications } from "../../queries/applications";
+// import ApplicationCard from "../../components/ApplicationCard";
+// import ApplicationsFilter from "../../components/ApplicationsFilter";
+// import { useNavigate } from "react-router-dom";
+
+// export default function ApplicationsWeb() {
+//   const navigate = useNavigate();
+//   const { data: applications, isLoading } = useApplications();
+//   const [filter, setFilter] = useState("All");
+
+//   const filteredApps =
+//     filter === "All"
+//       ? applications || []
+//       : (applications || []).filter((app: any) => app.status === filter);
+
+//   return (
+//     <div className="flex min-h-screen bg-gray-50">
+//       {/* Sidebar */}
+//       <Sidebar />
+
+//       <div className="flex-1 flex flex-col">
+//         {/* Navbar */}
+//         <div className="flex justify-end items-center px-6 py-2 bg-white border-b">
+//           <div className="relative">
+//             <input
+//               type="search"
+//               placeholder="Search applications..."
+//               className="px-3 py-2 border rounded-md w-72 focus:outline-none"
+//             />
+//           </div>
+
+//           <button
+//             onClick={() => navigate("/profile")}
+//             className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
+//           >
+//             <img
+//               src="/path/to/avatar.jpg"
+//               alt="user"
+//               className="w-full h-full object-cover"
+//             />
+//           </button>
+//         </div>
+
+//         {/* Content */}
+//         <div className="p-6">
+//           {/* Title */}
+//           {/* <h1 className="text-2xl font-inter italic font-bold mb-4">Applications List</h1> */}
+//           <div className="flex items-center justify-between px-6 py-4">
+//             <h1 className="text-2xl font-semibold font-inter">Applications List</h1>
+//             <button
+//               onClick={() => navigate("/applications/new")}
+//               className="px-4 py-2 bg-customBlue text-white rounded-md"
+//             >
+//               + Add Application
+//             </button>
+//           </div>
+
+//           {/* Dropdown Filter */}
+//           <ApplicationsFilter filter={filter} setFilter={setFilter} />
+
+//           {/* Applications Grid */}
+//           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+//             {isLoading ? (
+//               // Skeleton loaders
+//               Array.from({ length: 4 }).map((_, i) => (
+//                 <div
+//                   key={i}
+//                   className="animate-pulse bg-white rounded-lg shadow-md p-4 h-32"
+//                 >
+//                   <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+//                   <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
+//                   <div className="h-3 bg-gray-200 rounded w-1/3"></div>
+//                 </div>
+//               ))
+//             ) : filteredApps.length ? (
+//               filteredApps.map((app: any) => (
+//                 <ApplicationCard key={app.id} {...app} />
+//               ))
+//             ) : (
+//               <div className="col-span-full text-gray-500">
+//                 No applications found.
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+import React, { useState } from "react";
+import Sidebar from "../../components/Sidebar";
+import { useApplications } from "../../queries/applications";
+import ApplicationCard from "../../components/ApplicationCard";
+import ApplicationsFilter from "../../components/ApplicationsFilter";
+import { useNavigate } from "react-router-dom";
+
+export default function ApplicationsWeb() {
+  const navigate = useNavigate();
+  const { data: applications, isLoading } = useApplications();
+  const [filter, setFilter] = useState("All");
+
+  const filteredApps =
+    filter === "All"
+      ? applications || []
+      : (applications || []).filter((app: any) => app.status === filter);
+
+  return (
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
+      {/* Sidebar */}
+      <div className="w-64 flex-shrink-0 fixed top-0 left-0 h-screen border-r bg-white">
+        <Sidebar />
+      </div>
+
+      {/* Main Section */}
+      <div className="flex-1 flex flex-col pl-64">
+        {/* Navbar */}
+        <div className="sticky top-0 z-10 flex justify-end items-center px-6 py-2 bg-white border-b shadow-sm">
+          <div className="relative">
+            <input
+              type="search"
+              placeholder="Search applications..."
+              className="px-3 py-2 border rounded-md w-72 focus:outline-none"
+            />
+          </div>
+
+          <button
+            onClick={() => navigate("/profile")}
+            className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
+          >
+            <img
+              src="/path/to/avatar.jpg"
+              alt="user"
+              className="w-full h-full object-cover"
+            />
+          </button>
+        </div>
+
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex items-center justify-between px-1 py-4">
+            <h1 className="text-2xl font-semibold font-inter">
+              Applications List
+            </h1>
+            <button
+              onClick={() => navigate("/applications/new")}
+              className="px-4 py-2 bg-customBlue text-white rounded-md"
+            >
+              + Add Application
+            </button>
+          </div>
+
+          {/* Dropdown Filter */}
+          <ApplicationsFilter filter={filter} setFilter={setFilter} />
+
+          {/* Applications Grid */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {isLoading ? (
+              Array.from({ length: 4 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="animate-pulse bg-white rounded-lg shadow-md p-4 h-32"
+                >
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-1/3"></div>
+                </div>
+              ))
+            ) : filteredApps.length ? (
+              filteredApps.map((app: any) => (
+                <ApplicationCard key={app.id} {...app} />
+              ))
+            ) : (
+              <div className="col-span-full text-gray-500">
+                No applications found.
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
