@@ -10,12 +10,23 @@ export default function ApplicationsMobile() {
   const location = useLocation();
   const { data: applications, isLoading } = useApplications();
   const [filter, setFilter] = useState("All");
-
-  const filteredApps =
+  const [search, setSearch] = useState("");
+  
+   let filteredApps =
     filter === "All"
       ? applications || []
       : (applications || []).filter((app: any) => app.status === filter);
 
+
+   if (search.trim()) {
+    filteredApps = filteredApps.filter((app: any) =>
+      [app.job_title, app.company, app.status]
+        .filter(Boolean) // ignore null fields
+        .some((field) =>
+          field.toLowerCase().includes(search.trim().toLowerCase())
+        )
+    );
+  }     
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-20">
       {/* Top Navbar */}
@@ -43,6 +54,8 @@ export default function ApplicationsMobile() {
             type="text"
             placeholder="Search applications..."
             className="w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>

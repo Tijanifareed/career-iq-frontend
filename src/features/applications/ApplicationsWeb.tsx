@@ -14,10 +14,20 @@ export default function ApplicationsWeb() {
   const [search, setSearch] = useState("");
 
 
-  const filteredApps =
+  let filteredApps =
     filter === "All"
       ? applications || []
       : (applications || []).filter((app: any) => app.status === filter);
+
+  if (search.trim()) {
+    filteredApps = filteredApps.filter((app: any) =>
+      [app.job_title, app.company, app.status]
+        .filter(Boolean) // ignore null fields
+        .some((field) =>
+          field.toLowerCase().includes(search.trim().toLowerCase())
+        )
+    );
+  }    
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
@@ -35,6 +45,8 @@ export default function ApplicationsWeb() {
               type="search"
               placeholder="Search applications..."
               className="px-3 py-2 border rounded-md w-72 focus:outline-none"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
 
@@ -82,7 +94,12 @@ export default function ApplicationsWeb() {
               ))
             ) : filteredApps.length ? (
               filteredApps.map((app: any) => (
-                <ApplicationCard key={app.id} {...app} />
+                // <ApplicationCard 
+                // key={app.id} 
+                // {...app} 
+                // onClick={() => navigate(`/applications/${app.id}`, { state: { application: app } })}
+                // />
+                <ApplicationCard key={app.id} application={app} />
               ))
             ) : (
               <div className="col-span-full text-gray-500">

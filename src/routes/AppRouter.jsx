@@ -5,6 +5,7 @@ import Login from "../features/auth/Login";
 import Timezone from "../features/timezone/Timezone"; 
 import ApplicationsPage from "../features/applications/Applications"
 import AddApplicationPage from "../features/applications/AddApplication"
+import ApplicationDetailsWeb from "../features/applications/ApplicationDetailsWeb"
 
 export default function AppRouter() {
   return (
@@ -17,6 +18,7 @@ export default function AppRouter() {
         <Route path="/timezone" element={<Timezone />} />
         <Route path="/applications" element={<ApplicationsPage />} />
         <Route path="/applications/new" element={<AddApplicationPage />}/>
+        <Route path="/applications/:id" element={<ApplicationDetailsWeb />} />
 
       </Routes>
     </BrowserRouter>

@@ -89,13 +89,13 @@ export default function AddApplicationWeb() {
     </button>
 
     <div className="flex-1 flex justify-end items-center">
-      <div className="relative hidden md:block">
+      {/* <div className="relative hidden md:block">
         <input
           type="search"
           placeholder="Search applications..."
           className="px-3 py-2 border rounded-md w-72 focus:outline-none"
         />
-      </div>
+      </div> */}
 
       <button
         onClick={() => navigate("/profile")}
