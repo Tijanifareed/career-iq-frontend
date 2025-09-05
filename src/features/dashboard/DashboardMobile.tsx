@@ -16,14 +16,42 @@ import {
 } from "react-icons/fa";
 
 import { useDashboardStats, useRecentApplications } from "../../queries/dashboard";
+const API_BASE = import.meta.env.VITE_API_URL
+
 
 export default function DashboardMobile() {
   const navigate = useNavigate();
 
   const { data: stats, isLoading: statsLoading } = useDashboardStats();
   const { data: recent, isLoading: recentLoading } = useRecentApplications();
-
+  const [fetching, setFetching] = React.useState(false);
   const loading = statsLoading || recentLoading;
+
+  const handleRecentClick = async (id: number) => {
+
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found, please login again.");
+
+    try {
+      setFetching(true);
+      const res = await fetch(`${API_BASE}/applications/my-applications/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) throw new Error("Failed to fetch details");
+      const fullApp = await res.json();
+
+      navigate(`/applications/${id}`, { state: { application: fullApp.data } });
+    } catch (err) {
+      console.error(err);
+      alert("Unable to load application details. Please try again.");
+    } finally {
+      setFetching(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-16">
@@ -98,12 +126,18 @@ export default function DashboardMobile() {
                 company={r.company_name}
                 status={r.status}
                 timeAgo={r.time_ago || "just now"}
+                onClick={() => handleRecentClick(r.id)}
               />
             ))
           ) : (
             <div className="text-gray-500">No recent activity</div>
           )}
         </div>
+        {fetching && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
+    <div className="w-12 h-12 border-4 border-customBlue border-t-transparent rounded-full animate-spin"></div>
+  </div>
+)}
       </div>
 
       {/* Bottom Nav */}
@@ -139,9 +173,8 @@ function NavItem({
   return (
     <button
       onClick={() => navigate(to)}
-      className={`flex flex-col items-center text-sm ${
-        isActive ? "text-customBlue" : "text-gray-600"
-      }`}
+      className={`flex flex-col items-center text-sm ${isActive ? "text-customBlue" : "text-gray-600"
+        }`}
     >
       <div className={`text-lg ${isActive ? "text-customBlue" : ""}`}>
         {icon}

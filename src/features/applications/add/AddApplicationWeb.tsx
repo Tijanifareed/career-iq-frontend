@@ -1,12 +1,12 @@
 // pages/AddApplicationWeb.tsx
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMutation } from "@tanstack/react-query";
-import api from "../../apis/api";
+import api from "../../../apis/api";
 import { FaArrowLeft } from "react-icons/fa";
 // import { api } from "../../utils/api"; // adjust path to your axios instance
 

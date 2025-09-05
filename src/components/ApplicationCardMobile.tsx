@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ApplicationCardMobileProps {
   id: number;
@@ -6,18 +7,46 @@ interface ApplicationCardMobileProps {
   company: string;
   status: string;
   applied_date: string;
+  interview_date_utc?: string | null;
+  job_link?: string | null;
+  notes?: string | null;
+  job_description?: string | null;
+  follow_up_date?: string | null;
+  interview_timezone?: string | null;
 }
 
 export default function ApplicationCardMobile({
+  id,
   job_title,
   company,
   status,
   applied_date,
+  ...rest
 }: ApplicationCardMobileProps) {
+  const navigate = useNavigate();
+
   const formattedApplied = new Date(applied_date).toISOString().split("T")[0];
 
+  const handleClick = () => {
+    navigate(`/applications/${id}`, {
+      state: {
+        application: {
+          id,
+          job_title,
+          company,
+          status,
+          applied_date,
+          ...rest, // pass along any extra fields so details page works
+        },
+      },
+    });
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow p-4 mb-3">
+    <div
+      onClick={handleClick}
+      className="bg-white rounded-lg shadow p-4 mb-3 cursor-pointer hover:shadow-md transition"
+    >
       {/* Company & Date */}
       <div className="flex justify-between items-center text-sm text-gray-600 mb-1">
         <span className="font-medium">{company}</span>

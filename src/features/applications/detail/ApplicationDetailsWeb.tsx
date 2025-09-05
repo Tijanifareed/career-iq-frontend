@@ -1,7 +1,7 @@
 // pages/ApplicationDetailsWeb.tsx
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import { FaArrowLeft } from "react-icons/fa";
 
 type Application = {
@@ -97,7 +97,7 @@ export default function ApplicationDetailsWeb() {
               <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                 <button
                   onClick={handleEdit}
-                  className="px-4 py-2 bg-customBlue text-white rounded-md hover:bg-blue-600 transition text-sm sm:text-base"
+                  className="px-4 py-2 bg-customBlue text-white rounded-md hover:bg-blue-400 transition text-sm sm:text-base"
                 >
                   Edit
                 </button>
