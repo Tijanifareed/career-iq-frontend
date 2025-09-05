@@ -4,8 +4,8 @@ import DashboardPage from "../features/dashboard/Dashboard"; // placeholder
 import Login from "../features/auth/Login";
 import Timezone from "../features/timezone/Timezone"; 
 import ApplicationsPage from "../features/applications/Applications"
-import AddApplicationPage from "../features/applications/AddApplication"
-import ApplicationDetailsWeb from "../features/applications/ApplicationDetailsWeb"
+import AddApplicationPage from "../features/applications/add/AddApplication"
+import ApplicationDetailsWeb from "../features/applications/detail/ApplicationDetailsWeb"
 
 export default function AppRouter() {
   return (
