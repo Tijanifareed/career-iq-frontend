@@ -27,9 +27,38 @@ export default function ApplicationDetailsWeb() {
     return <p className="p-6">No application data found.</p>;
   }
 
-  const handleEdit = () => {
-    navigate(`/applications/${application.id}/edit`, { state: { application } });
-  };
+  // const handleEdit = () => {
+  //   navigate(`/applications/${application.id}/edit`, { state: { application } });
+  // };
+  // const [fetching, setFetching] = React.useState(false);
+const [fetching, setFetching] = React.useState(false);
+const API_BASE = import.meta.env.VITE_API_URL
+
+const handleEdit = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No token found, please login again.");
+
+  try {
+    setFetching(true);
+    const res = await fetch(`${API_BASE}/applications/my-applications/${application.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!res.ok) throw new Error("Failed to fetch details");
+    const fullApp = await res.json();
+
+    navigate(`/applications/${application.id}/edit`, { state: { application: fullApp.data } });
+  } catch (err) {
+    console.error(err);
+    alert("Unable to load application for editing. Please try again.");
+  } finally {
+    setFetching(false);
+  }
+};
+
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this application?")) {
@@ -189,6 +218,11 @@ export default function ApplicationDetailsWeb() {
           </div>
         </main>
       </div>
+      {fetching && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
+    <div className="w-12 h-12 border-4 border-customBlue border-t-transparent rounded-full animate-spin"></div>
+  </div>
+)}
     </div>
   );
 }
