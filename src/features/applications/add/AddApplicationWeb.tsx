@@ -58,7 +58,7 @@ export default function AddApplicationWeb() {
     },
     onSuccess: (res) => {
       if (res?.application.status === "Interview") {
-        navigate(`/applications/${res.id}/interview-details`);
+        navigate(`/applications/${res.application.id}/interview-details`);
       } else {
         navigate("/applications");
       }
@@ -201,7 +201,7 @@ export default function AddApplicationWeb() {
                 <label className="block text-sm font-medium mb-1">Notes</label>
                 <textarea
                   {...register("notes")}
-                  placeholder="Add any relevant notes about the application, e.g., recruiter contact, interviewers, etc."
+                  placeholder="Add any relevant notes about the application, e.g. Job location recruiter contact, interviewers, etc."
                   rows={3}
                   className="w-full border rounded-md px-3 py-2"
                 />

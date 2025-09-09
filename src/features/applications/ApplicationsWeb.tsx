@@ -103,7 +103,7 @@ export default function ApplicationsWeb() {
               ))
             ) : (
               <div className="col-span-full text-gray-500">
-                No applications found.
+                You have not added any applications yet.
               </div>
             )}
           </div>

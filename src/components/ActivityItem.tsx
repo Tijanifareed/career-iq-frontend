@@ -29,7 +29,7 @@ export default function ActivityItem({ title, company, status, timeAgo, onClick}
               ? "bg-red-700 text-white"
               : "bg-gray-100 text-gray-600"
           }`}>{status}</div>
-        <div className="text-xs text-gray-400">{timeAgo}</div>
+        <div className="text-xs text-gray-400">Added {timeAgo}</div>
       </div>
     </div>
   );

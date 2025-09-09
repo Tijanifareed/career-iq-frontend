@@ -1,21 +1,38 @@
-
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { getTimezoneAbbr } from "./timezoneEnum";
 
 interface ApplicationCardProps {
   application: any; // Replace with proper type later
 }
 
+function formatDate(dateString: string | null) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function formatTime(dateString: string | null) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export default function ApplicationCard({ application }: ApplicationCardProps) {
   const navigate = useNavigate();
-  const { id, job_title, company, status, applied_date, interview_date_utc } =
-    application;
+  const { id, job_title, company, status, applied_date, interview_date, interview_timezone } = application;
 
-  const formattedApplied = new Date(applied_date).toISOString().split("T")[0];
-  const formattedInterview = interview_date_utc
-    ? new Date(interview_date_utc).toISOString().split("T")[0]
-    : null;
+  const appliedDate = formatDate(applied_date);
+  const interviewDate = formatDate(interview_date);
+  const interviewTime = formatTime(interview_date);
+  const timezonee = interview_timezone;
 
   const statusColors: Record<string, string> = {
     Applied: "bg-customBlue text-white",
@@ -38,8 +55,8 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
         <p className="text-sm text-gray-500">{company}</p>
       </div>
 
-      {/* Status */}
-      <div className="mt-3">
+      {/* Status + Interview Time */}
+      <div className="mt-3 flex justify-between items-center">
         <span
           className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${
             statusColors[status] || statusColors.not_applied
@@ -47,17 +64,23 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
         >
           {status}
         </span>
+        {interviewTime && status == "Interview" && (
+          <span className="block max-w-[160px] truncate text-xs text-gray-500 font-medium ">
+            ⏰ {interviewTime} - {getTimezoneAbbr(timezonee) || timezonee}
+          </span>
+        )}
       </div>
 
       {/* Dates */}
-      <div className="mt-4 border-t border-gray-100 pt-3 text-sm text-gray-600">
-        <p>
-          <span className="font-medium">📅 Applied:</span> {formattedApplied}
-        </p>
-        {formattedInterview && (
+      <div className="mt-4 border-t border-gray-100 pt-3 text-sm text-gray-600 space-y-2">
+        {appliedDate && (
           <p>
-            <span className="font-medium">🎤 Interview:</span>{" "}
-            {formattedInterview}
+            <span className="font-medium">📅 Applied:</span> {appliedDate}
+          </p>
+        )}
+        {interviewDate && status == "Interview" && (
+          <p>
+            <span className="font-medium">🎤 Interview:</span> {interviewDate}
           </p>
         )}
       </div>

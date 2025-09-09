@@ -66,9 +66,9 @@ export default function Signup() {
 
   return (
     <div>
-      <FormWrapper title="CareerIQ" logoSrc="/logo.png">
+      <FormWrapper title="HireJourney" logoSrc="/logo.png">
         <h2 className="text-2xl font-bold font-inter text-black text-center mb-1">
-          Welcome to CareerIQ
+          Welcome to HireJourney
         </h2>
         <p className="text-center text-gray-600 mb-4 text-sm font-inter" >
           Create Your Account.

@@ -15,7 +15,7 @@ const navItems = [
   { id: "dashboard", label: "Dashboard", icon: <FaHome />, path: "/dashboard" },
   { id: "applications", label: "Applications", icon: <FaListAlt />, path: "/applications" },
   { id: "resume", label: "AI Resume Feedback", icon: <FaFileAlt />, path: "/resume" },
-  { id: "interview", label: "Interview Prep", icon: <FaComments />, path: "/interview" },
+  // { id: "interview", label: "Interview Prep", icon: <FaComments />, path: "/interview" },
   // { id: "timeline", label: "Timeline", icon: <FaStream />, path: "/timeline" },
   { id: "profile", label: "Profile", icon: <FaUser />, path: "/profile" },
 ];
@@ -71,11 +71,11 @@ export default function Sidebar() {
               alt="CareerIQ Logo"
               className="w-8 h-8"
             />
-            <span className="text-base font-bold font-inter italic text-customBlue">CareerIQ</span>
+            <span className="text-base font-bold font-inter italic text-customBlue">HireJourney</span>
           </div>
           {/* Small tagline */}
           <span className="text-xs text-gray-500 mt-1">
-            Smarter job search
+            Track. Optimize. Succeed.
           </span>
         </div>
       </div>
