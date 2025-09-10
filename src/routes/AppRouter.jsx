@@ -8,12 +8,13 @@ import AddApplicationPage from "../features/applications/add/AddApplication"
 import ApplicationDetailsWeb from "../features/applications/detail/ApplicationDetailsWeb"
 import EditApplicationWeb from "../features/applications/edit/EditApplicationWeb"
 import InterviewDetailsWeb from "../features/applications/interview/InterviewDetailWeb"
+import LandingPage from "../features/landing/LandingPage"
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} /> 
+        <Route path="/" element={<LandingPage />} /> 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<DashboardPage />} />

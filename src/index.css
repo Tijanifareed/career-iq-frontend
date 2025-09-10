@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Works for Chrome, Edge, Safari */
+/* index.css */
+
+/* GLOBAL SCROLLBAR (applies to whole app) */
+html {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #5795c2 #f1f1f1; /* thumb | track */
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #2563eb;
+  border-radius: 10px;
+}
+
