@@ -26,7 +26,7 @@ export default function SolutionSection() {
       <div className="max-w-6xl mx-auto">
         {/* Section Title */}
         <h2 className="text-3xl md:text-4xl font-bold text-center font-inter text-gray-900 mb-16">
-          Powerful features designed for modern job
+          Smart features for modern Job Seekers
         </h2>
 
         {/* Problem Cards */}

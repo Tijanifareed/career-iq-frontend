@@ -4,6 +4,7 @@ import Navbar from "./components/LandingNavbar";
 import HeroSection from "./components/HeroSection"
 import ProblemsSection from "./components/ProblemsSection";
 import SolutionSection from "./components/SolutionSection";
+import HowItWorksSection from "./components/HowItWorksSection";
 
 export default function LandingPage() {
   return (
@@ -17,6 +18,7 @@ export default function LandingPage() {
         <HeroSection />
         <ProblemsSection />
         <SolutionSection />
+        <HowItWorksSection/>
         {/* other sections coming soon */}
       </main>
     </div>
