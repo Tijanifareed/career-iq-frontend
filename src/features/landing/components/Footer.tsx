@@ -17,7 +17,7 @@ export default function Footer() {
             <span className="text-xl font-bold italic text-white">HireJourney</span>
           </div>
           <p className="text-sm text-gray-400 leading-relaxed">
-            Tjake the stress out of job hunting. Stay organized, improve your resume, and land the job you deserve.
+            Take the stress out of job hunting. Stay organized, improve your resume, and land the job you deserve.
           </p>
         </div>
 
