@@ -6,6 +6,7 @@ import ProblemsSection from "./components/ProblemsSection";
 import SolutionSection from "./components/SolutionSection";
 import HowItWorksSection from "./components/HowItWorksSection";
 import CallToAction from "./components/CallToAction";
+import Footer from "./components/Footer";
 
 export default function LandingPage() {
   return (
@@ -21,6 +22,7 @@ export default function LandingPage() {
         <SolutionSection />
         <HowItWorksSection/>
          <CallToAction />
+         <Footer/>
         {/* other sections coming soon */}
       </main>
     </div>
