@@ -9,6 +9,7 @@ import ApplicationDetailsWeb from "../features/applications/detail/ApplicationDe
 import EditApplicationWeb from "../features/applications/edit/EditApplicationWeb"
 import InterviewDetailsWeb from "../features/applications/interview/InterviewDetailWeb"
 import LandingPage from "../features/landing/LandingPage"
+import AboutPage from "../features/landing/AboutPage"
 
 export default function AppRouter() {
   return (
@@ -24,6 +25,9 @@ export default function AppRouter() {
         <Route path="/applications/:id" element={<ApplicationDetailsWeb />} />
         <Route path="/applications/:id/edit" element={<EditApplicationWeb />} />
         <Route path="/applications/:id/interview-details" element={< InterviewDetailsWeb/>} />
+        <Route path="/about" element={<AboutPage />} />
+
+
 
       </Routes>
     </BrowserRouter>
