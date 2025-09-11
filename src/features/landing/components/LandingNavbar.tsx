@@ -29,7 +29,7 @@ export default function LandingNavbar() {
       <div className="flex items-center gap-2 sm:gap-3">
         <button
           onClick={() => navigate("/signup")}
-          className="px-3 sm:px-5 py-1.5 sm:py-2 bg-customBlue font-inter text-white text-xs sm:text-sm rounded-md font-medium hover:bg-blue-500 transition"
+          className="px-3 sm:px-5 py-1.5 sm:py-2 bg-customBlue font-inter text-white text-xs sm:text-sm rounded-md font-medium hover:bg-blue-400 transition"
         >
           Sign Up
         </button>
