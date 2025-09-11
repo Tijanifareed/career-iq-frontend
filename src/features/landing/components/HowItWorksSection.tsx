@@ -9,19 +9,19 @@ export default function HowItWorksSection() {
       prefixText: "1.",
       image: "/icons/add-app1.png",
       title: "Add your applications",
-      description: '"Enter details of jobs you are applying to."'
+      description: '"Easily upload and organize all your job applications in one place."'
     },
     {
      prefixText: "2.",
       image: "/icons/track-progress.png",
       title: "Track your progress",
-      description: '"See all deadlines and statuses in one place"'
+      description: '"Monitor each application’s status and manage follow-ups effortlessly."'
     },
     {
      prefixText: "3.",
       image: "/icons/optimize.png",
       title: "Optimize your resume",
-      description: '"Get instant AI-powered feedback."'
+      description: '"Get AI-powered feedback to enhance your resume and increase your chances."'
     },
   ];
 
