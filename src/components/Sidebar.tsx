@@ -14,7 +14,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 const navItems = [
   { id: "dashboard", label: "Dashboard", icon: <FaHome />, path: "/dashboard" },
   { id: "applications", label: "Applications", icon: <FaListAlt />, path: "/applications" },
-  { id: "resume", label: "AI Resume Feedback", icon: <FaFileAlt />, path: "/resume" },
+  { id: "resume", label: "AI Resume Feedback", icon: <FaFileAlt />, path: "/ai/resume/feedback" },
   // { id: "interview", label: "Interview Prep", icon: <FaComments />, path: "/interview" },
   // { id: "timeline", label: "Timeline", icon: <FaStream />, path: "/timeline" },
   { id: "profile", label: "Profile", icon: <FaUser />, path: "/profile" },

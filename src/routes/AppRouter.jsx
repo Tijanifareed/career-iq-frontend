@@ -12,6 +12,7 @@ import LandingPage from "../features/landing/LandingPage"
 import AboutPage from "../features/landing/AboutPage"
 import PrivacyPolicy from "../features/landing/PrivacyPolicy"
 import TermsOfService from "../features/landing/TermsOfService"
+import AiResumeFeedbackPage from "../features/resume/AiResumeFeedback"
 
 export default function AppRouter() {
   return (
@@ -30,6 +31,7 @@ export default function AppRouter() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/ai/resume/feedback" element={<AiResumeFeedbackPage/>}/>
 
 
 
