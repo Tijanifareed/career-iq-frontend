@@ -90,7 +90,7 @@ export default function ApplicationsMobile() {
       <div className="fixed bottom-0 w-full bg-white border-t flex justify-around py-2">
         <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" location={location} />
         <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" location={location} />
-        <NavItem label="Resume AI" icon={<FaRobot />} to="/resume-ai" location={location} />
+        <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" location={location} />
         <NavItem label="Interview" icon={<FaComments />} to="/interview" location={location} />
       </div>
     </div>

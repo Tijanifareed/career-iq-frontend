@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
 import { FaArrowLeft } from "react-icons/fa";
 import { getTimezoneAbbr } from "../../../components/timezoneEnum";
+import api from "../../../apis/api";
 
 type Application = {
   id: number;
@@ -33,24 +34,41 @@ export default function ApplicationDetailsWeb() {
   // };
   // const [fetching, setFetching] = React.useState(false);
   const [fetching, setFetching] = React.useState(false);
-  const API_BASE = import.meta.env.VITE_API_URL
 
+  // const handleEdit = async () => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) throw new Error("No token found, please login again.");
+
+  //   try {
+  //     setFetching(true);
+  //     const res = await fetch(`${API_BASE}/applications/my-applications/${application.id}`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     if (!res.ok) throw new Error("Failed to fetch details");
+  //     const fullApp = await res.json();
+  //     navigate(`/applications/${application.id}/edit`, { state: { application: fullApp.data } });
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Unable to load application for editing. Please try again.");
+  //   } finally {
+  //     setFetching(false);
+  //   }
+  // };
   const handleEdit = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("No token found, please login again.");
-
     try {
       setFetching(true);
-      const res = await fetch(`${API_BASE}/applications/my-applications/${application.id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+
+      // axios instance will automatically attach Authorization header
+      const res = await api.get(`/applications/my-applications/${application.id}`);
+
+      // assuming backend response is { data: { ...applicationData } }
+      navigate(`/applications/${application.id}/edit`, {
+        state: { application: res.data.data },
       });
-      if (!res.ok) throw new Error("Failed to fetch details");
-      const fullApp = await res.json();
-      navigate(`/applications/${application.id}/edit`, { state: { application: fullApp.data } });
     } catch (err) {
       console.error(err);
       alert("Unable to load application for editing. Please try again.");
@@ -61,30 +79,24 @@ export default function ApplicationDetailsWeb() {
 
 
   const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this application?")) {
-      const token = localStorage.getItem("token");
-      if (!token) throw new Error("No token found, please login again.");
-      try {
-        setFetching(true);
-        const res = await fetch(`${API_BASE}/applications/my-applications/${application.id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!res.ok) throw new Error("Failed to fetch details");
-        const fullApp = await res.json();
-        navigate("/applications");
-      } catch (err) {
-        console.error(err);
-        alert("Delete failed. Please try again later.");
-      } finally {
-        setFetching(false);
-      }
+    if (!window.confirm("Are you sure you want to delete this application?")) return;
 
+    try {
+      setFetching(true);
+
+      // axios instance automatically attaches Authorization header
+      await api.delete(`/applications/my-applications/${application.id}`);
+
+      // after delete, navigate back to applications list
+      navigate("/applications");
+    } catch (err) {
+      console.error(err);
+      alert("Delete failed. Please try again later.");
+    } finally {
+      setFetching(false);
     }
   };
+
 
   const formatDate = (d?: string | null) =>
     d

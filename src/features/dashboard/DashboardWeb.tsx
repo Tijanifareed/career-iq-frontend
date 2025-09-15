@@ -11,7 +11,8 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDashboardStats, useRecentApplications } from "../../queries/dashboard";
-const API_BASE = import.meta.env.VITE_API_URL
+import api from "../../apis/api";
+import Ticker from "../../components/TickerComponent";
 
 export default function DashboardWeb() {
   const navigate = useNavigate();
@@ -36,30 +37,20 @@ export default function DashboardWeb() {
 
 
   const handleRecentClick = async (id: number) => {
+  try {
+    setFetching(true);
 
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("No token found, please login again.");
+    // axios handles tokens + refresh automatically
+    const res = await api.get(`/applications/my-applications/${id}`);
 
-    try {
-      setFetching(true);
-      const res = await fetch(`${API_BASE}/applications/my-applications/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!res.ok) throw new Error("Failed to fetch details");
-      const fullApp = await res.json();
-
-      navigate(`/applications/${id}`, { state: { application: fullApp.data } });
-    } catch (err) {
-      console.error(err);
-      alert("Unable to load application details. Please try again.");
-    } finally {
-      setFetching(false);
-    }
-  };
+    navigate(`/applications/${id}`, { state: { application: res.data.data } });
+  } catch (err) {
+    console.error(err);
+    alert("Unable to load application details. Please try again.");
+  } finally {
+    setFetching(false);
+  }
+};
 
 
   return (
@@ -72,14 +63,8 @@ export default function DashboardWeb() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col pl-64">
         {/* Sticky Navbar */}
-        <div className="sticky top-0 z-20 flex justify-end items-center px-6 py-2 bg-white border-b shadow-sm">
-          {/* <div className="relative">
-            <input
-              type="search"
-              placeholder="Search applications..."
-              className="px-3 py-2 border rounded-md w-72 focus:outline-none"
-            />
-          </div> */}
+        <div className="sticky top-0 z-20 flex justify-between items-center px-6 py-2 bg-white border-b shadow-sm">
+          <Ticker />
 
           <button
             onClick={() => navigate("/profile")}

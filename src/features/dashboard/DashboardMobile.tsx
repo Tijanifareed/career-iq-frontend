@@ -16,7 +16,7 @@ import {
 } from "react-icons/fa";
 
 import { useDashboardStats, useRecentApplications } from "../../queries/dashboard";
-const API_BASE = import.meta.env.VITE_API_URL
+import api from "../../apis/api";
 
 
 export default function DashboardMobile() {
@@ -28,30 +28,20 @@ export default function DashboardMobile() {
   const loading = statsLoading || recentLoading;
 
   const handleRecentClick = async (id: number) => {
+  try {
+    setFetching(true);
 
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("No token found, please login again.");
+    // axios handles tokens + refresh automatically
+    const res = await api.get(`/applications/my-applications/${id}`);
 
-    try {
-      setFetching(true);
-      const res = await fetch(`${API_BASE}/applications/my-applications/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!res.ok) throw new Error("Failed to fetch details");
-      const fullApp = await res.json();
-
-      navigate(`/applications/${id}`, { state: { application: fullApp.data } });
-    } catch (err) {
-      console.error(err);
-      alert("Unable to load application details. Please try again.");
-    } finally {
-      setFetching(false);
-    }
-  };
+    navigate(`/applications/${id}`, { state: { application: res.data.data } });
+  } catch (err) {
+    console.error(err);
+    alert("Unable to load application details. Please try again.");
+  } finally {
+    setFetching(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-16">

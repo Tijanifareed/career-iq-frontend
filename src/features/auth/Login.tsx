@@ -24,15 +24,15 @@ export default function Login() {
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(!email || !password) return;
-    
+    if (!email || !password) return;
+
     setLoading(true);
     // console.log("FORM SUBMITTED ✅");
     // console.log({ email, password });
 
-    
 
-    try{
+
+    try {
       const data = await loginUser(email, password);
       // console.log("Login successful:", data);
 
@@ -42,17 +42,18 @@ export default function Login() {
 
       const route = data.data?.timezone ? "/dashboard" : "/timezone";
       setNextRoute(route);
-      if (data.data?.token) {
-        localStorage.setItem("token", data.data.token);
+      if (data.access_token && data.refresh_token) {
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
       }
-    } catch (err: any){
-      const message = 
-      err.response?.data?.message||
-      err.message||
-      "Login Failed";
+    } catch (err: any) {
+      const message =
+        err.response?.data?.message ||
+        err.message ||
+        "Login Failed";
       setModalType("error");
       setModalMessage(message);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -60,7 +61,7 @@ export default function Login() {
   const handleModalClose = () => {
     setModalMessage(null);
     if (modalType === "success" && nextRoute) {
-      navigate(nextRoute); 
+      navigate(nextRoute);
     }
   };
 
@@ -87,16 +88,16 @@ export default function Login() {
             label="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            showForgotPassword={true}  
+            showForgotPassword={true}
             forgotPasswordUrl="/forgot-password"
           />
 
           <Button type="submit" loading={loading}>
             {loading ? "Signing up..." : "Login"}
-            </Button>
+          </Button>
         </form>
-         <DividerWithText text="Or" />
-          <GoogleSignInButton onClick={() => console.log("Google Sign-In clicked")} />
+        <DividerWithText text="Or" />
+        <GoogleSignInButton onClick={() => console.log("Google Sign-In clicked")} />
         <AuthFooter
           promptText="Don't have an account?"
           actionText="Sign Up"
