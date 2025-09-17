@@ -29,7 +29,7 @@ var user_email = localStorage.getItem("user_email") || "No email found";
       setModalMessage(data.message || "Verified");
 
       if (data.message == "Reset code verified successfully. You can now reset your password."){
-        setNextRoute("/verify-code");
+        setNextRoute("/reset-password");
       }
     } catch (err: any) {
       const message =

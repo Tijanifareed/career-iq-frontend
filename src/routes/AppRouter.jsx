@@ -15,6 +15,7 @@ import TermsOfService from "../features/landing/TermsOfService"
 import AiResumeFeedbackPage from "../features/resume/AiResumeFeedback"
 import ForgotPassword from "../features/auth/ForgotPassword"
 import VerifyResetCode from "../features/auth/VerifyResetCode"
+import ResetPassword from "../features/auth/ResetPassword";
 
 export default function AppRouter() {
   return (
@@ -36,14 +37,7 @@ export default function AppRouter() {
         <Route path="/ai/resume/feedback" element={<AiResumeFeedbackPage/>}/>
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
         <Route path="/verify-code" element={<VerifyResetCode/>}/>
-
-
-
-
-
-
-
-
+        <Route path="/reset-password" element={<ResetPassword/>}/>
       </Routes>
     </BrowserRouter>
   );
