@@ -35,29 +35,6 @@ export default function ApplicationDetailsWeb() {
   // const [fetching, setFetching] = React.useState(false);
   const [fetching, setFetching] = React.useState(false);
 
-  // const handleEdit = async () => {
-  //   const token = localStorage.getItem("token");
-  //   if (!token) throw new Error("No token found, please login again.");
-
-  //   try {
-  //     setFetching(true);
-  //     const res = await fetch(`${API_BASE}/applications/my-applications/${application.id}`, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     if (!res.ok) throw new Error("Failed to fetch details");
-  //     const fullApp = await res.json();
-  //     navigate(`/applications/${application.id}/edit`, { state: { application: fullApp.data } });
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("Unable to load application for editing. Please try again.");
-  //   } finally {
-  //     setFetching(false);
-  //   }
-  // };
   const handleEdit = async () => {
     try {
       setFetching(true);

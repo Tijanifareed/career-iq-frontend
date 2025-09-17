@@ -4,6 +4,8 @@ import Sidebar from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useAnalyzeResume } from "../../queries/useAnalyzeResume";
 import Ticker from "../../components/TickerComponent";
+import { FaSearch, FaHome, FaFileAlt, FaRobot, FaComments, FaPlus } from "react-icons/fa";
+
 
 type AnalyzeResponse = {
   filename?: string;
@@ -94,8 +96,15 @@ export default function AiResumeFeedbackWeb() {
       <div className="flex-1 flex flex-col md:pl-64 h-screen">
         {/* Navbar */}
         <div className="sticky top-0 z-10 flex justify-between items-center px-4 md:px-6 py-2 bg-white border-b">
-          <Ticker />
+          {/* Left side placeholder (keeps spacing correct) */}
           <div />
+
+          {/* Center text (only visible on mobile) */}
+          <div className="block md:hidden text-sm font-medium text-gray-800">
+            AI Resume Feedback
+          </div>
+
+          {/* Right side (avatar) */}
           <div className="flex items-center">
             <button
               onClick={() => navigate("/profile")}
@@ -110,10 +119,16 @@ export default function AiResumeFeedbackWeb() {
           </div>
         </div>
 
+
+
+        <div className="bg-gray-50 border-b ">
+          <Ticker />
+        </div>
+
         {/* Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-6 overflow-y-auto pb-16">
           <div className="max-w-7xl mx-auto space-y-6">
-            <div className="text-center">
+            <div className="hidden md:block text-center">
               <h1 className="text-2xl font-semibold">AI Resume Feedback</h1>
             </div>
 
@@ -330,6 +345,42 @@ export default function AiResumeFeedbackWeb() {
           </div>
         </main>
       </div>
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t flex justify-around py-2 md:hidden z-20">
+        <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" location={location} />
+        <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" location={location} />
+        <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" location={location} />
+        <NavItem label="Interview" icon={<FaComments />} to="/interview" location={location} />
+      </div>
     </div>
+  );
+}
+
+
+
+function NavItem({
+  label,
+  icon,
+  to,
+  location,
+}: {
+  label: string;
+  icon: React.ReactNode;
+  to: string;
+  location: any;
+}) {
+  const navigate = useNavigate();
+  const isActive = location.pathname.startsWith(to);
+
+  return (
+    <button
+      onClick={() => navigate(to)}
+      className={`flex flex-col items-center text-sm ${isActive ? "text-customBlue" : "text-gray-600"
+        }`}
+    >
+      <div className={`text-lg ${isActive ? "text-customBlue" : ""}`}>
+        {icon}
+      </div>
+      <span>{label}</span>
+    </button>
   );
 }

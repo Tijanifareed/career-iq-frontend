@@ -46,7 +46,7 @@ export default function InterviewDetailsWeb() {
                };
 
                const res = await api.post(
-                    `/applications/applications/${id}/set-interview`,
+                    `/applications/${id}/set-interview`,
                     payload
                );
                return res.data;

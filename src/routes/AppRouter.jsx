@@ -13,6 +13,8 @@ import AboutPage from "../features/landing/AboutPage"
 import PrivacyPolicy from "../features/landing/PrivacyPolicy"
 import TermsOfService from "../features/landing/TermsOfService"
 import AiResumeFeedbackPage from "../features/resume/AiResumeFeedback"
+import ForgotPassword from "../features/auth/ForgotPassword"
+import VerifyResetCode from "../features/auth/VerifyResetCode"
 
 export default function AppRouter() {
   return (
@@ -32,6 +34,11 @@ export default function AppRouter() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/ai/resume/feedback" element={<AiResumeFeedbackPage/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
+        <Route path="/verify-code" element={<VerifyResetCode/>}/>
+
+
+
 
 
 

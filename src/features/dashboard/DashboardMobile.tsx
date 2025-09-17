@@ -17,6 +17,7 @@ import {
 
 import { useDashboardStats, useRecentApplications } from "../../queries/dashboard";
 import api from "../../apis/api";
+import Ticker from "../../components/TickerComponent";
 
 
 export default function DashboardMobile() {
@@ -28,20 +29,20 @@ export default function DashboardMobile() {
   const loading = statsLoading || recentLoading;
 
   const handleRecentClick = async (id: number) => {
-  try {
-    setFetching(true);
+    try {
+      setFetching(true);
 
-    // axios handles tokens + refresh automatically
-    const res = await api.get(`/applications/my-applications/${id}`);
+      // axios handles tokens + refresh automatically
+      const res = await api.get(`/applications/my-applications/${id}`);
 
-    navigate(`/applications/${id}`, { state: { application: res.data.data } });
-  } catch (err) {
-    console.error(err);
-    alert("Unable to load application details. Please try again.");
-  } finally {
-    setFetching(false);
-  }
-};
+      navigate(`/applications/${id}`, { state: { application: res.data.data } });
+    } catch (err) {
+      console.error(err);
+      alert("Unable to load application details. Please try again.");
+    } finally {
+      setFetching(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-16">
@@ -61,7 +62,11 @@ export default function DashboardMobile() {
           />
         </button>
       </div>
-
+      <div className="w-full bg-white border-b flex justify-center items-center py-2">
+        <div className="max-w-[80%] text-center font-inter italic">
+          <Ticker />
+        </div>
+      </div>
       {/* Stat cards */}
       <div className="grid grid-cols-2 gap-4 px-4 mt-4">
         <StatCard
@@ -124,17 +129,17 @@ export default function DashboardMobile() {
           )}
         </div>
         {fetching && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
-    <div className="w-12 h-12 border-4 border-customBlue border-t-transparent rounded-full animate-spin"></div>
-  </div>
-)}
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
+            <div className="w-12 h-12 border-4 border-customBlue border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
       </div>
 
       {/* Bottom Nav */}
       <div className="fixed bottom-0 w-full bg-white border-t flex justify-around py-2">
         <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" />
         <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" />
-        <NavItem label="Resume AI" icon={<FaRobot />} to="/resume-ai" />
+        <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" />
         <NavItem label="Interview" icon={<FaComments />} to="/interview" />
 
       </div>

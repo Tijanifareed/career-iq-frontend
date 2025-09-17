@@ -64,7 +64,9 @@ export default function DashboardWeb() {
       <div className="flex-1 flex flex-col pl-64">
         {/* Sticky Navbar */}
         <div className="sticky top-0 z-20 flex justify-between items-center px-6 py-2 bg-white border-b shadow-sm">
+          
           <Ticker />
+        
 
           <button
             onClick={() => navigate("/profile")}

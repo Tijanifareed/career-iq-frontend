@@ -66,36 +66,8 @@ export default function EditApplicationWeb() {
      }, [application, reset]);
 
      if (!application) return <p className="p-6">No application found</p>;
-     console.log(application);
+     // console.log(application);
 
-     // const mutation = useMutation({
-     //      mutationFn: async (formData: ApplicationFormValues) => {
-     //           const payload: Record<string, any> = {};
-     //           Object.keys(dirtyFields).forEach((field) => {
-     //                const val = (formData as any)[field];
-     //                if (val instanceof Date) {
-     //                     // ✅ FIX: keep local time, don’t use toISOString()
-     //                     payload[field] = val.toLocaleString("sv-SE");
-     //                } else {
-     //                     payload[field] = val ?? null;
-     //                }
-     //           });
-
-     //           const res = await api.patch(`/applications/my-applications/${id}`, payload);
-     //           return res.data;
-     //      },
-     //      onSuccess: (res) => {
-     //           if (
-     //                res?.application.status === "Interview" &&
-     //                res.application.interview_date == null &&
-     //                res.application.interview_timezone == null
-     //           ) {
-     //                navigate(`/applications/${id}/interview-details`);
-     //           } else {
-     //                navigate("/applications");
-     //           }
-     //      },
-     // });
      const mutation = useMutation({
           mutationFn: async (formData: ApplicationFormValues) => {
                const payload: Record<string, any> = {};

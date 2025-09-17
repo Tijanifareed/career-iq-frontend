@@ -4,6 +4,7 @@ import { FaSearch, FaHome, FaFileAlt, FaRobot, FaComments, FaPlus } from "react-
 import { useApplications } from "../../queries/applications";
 import ApplicationsFilter from "../../components/ApplicationsFilter";
 import ApplicationCardMobile from "../../components/ApplicationCardMobile";
+import Ticker from "../../components/TickerComponent";
 
 export default function ApplicationsMobile() {
   const navigate = useNavigate();
@@ -44,6 +45,11 @@ export default function ApplicationsMobile() {
             className="w-full h-full object-cover"
           />
         </button>
+      </div>
+      <div className="w-full bg-white border-b flex justify-center items-center py-2">
+        <div className="max-w-[100%] text-center font-inter italic">
+          <Ticker />
+        </div>
       </div>
 
       {/* Search Bar */}
