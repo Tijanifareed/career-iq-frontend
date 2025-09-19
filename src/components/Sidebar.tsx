@@ -17,7 +17,7 @@ const navItems = [
   { id: "resume", label: "AI Resume Feedback", icon: <FaFileAlt />, path: "/ai/resume/feedback" },
   // { id: "interview", label: "Interview Prep", icon: <FaComments />, path: "/interview" },
   // { id: "timeline", label: "Timeline", icon: <FaStream />, path: "/timeline" },
-  { id: "profile", label: "Profile", icon: <FaUser />, path: "/profile" },
+  { id: "profile", label: "Profile", icon: <FaUser />, path: "/my-profile" },
 ];
 
 export default function Sidebar() {

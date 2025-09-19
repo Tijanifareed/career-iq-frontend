@@ -82,11 +82,11 @@ export default function ApplicationsWeb() {
     </div>
 
     <button
-      onClick={() => navigate("/profile")}
+      onClick={() => navigate("/my-profile")}
       className="w-9 h-9 rounded-full overflow-hidden border"
     >
       <img
-        src="/path/to/avatar.jpg"
+              src={localStorage.getItem("profile_picture")??"/public/default_profile.png"}
         alt="user"
         className="w-full h-full object-cover"
       />

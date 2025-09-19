@@ -130,11 +130,11 @@ export default function EditApplicationWeb() {
 
                          <div className="flex-1 flex justify-end items-center">
                               <button
-                                   onClick={() => navigate("/profile")}
+                                   onClick={() => navigate("/my-profile")}
                                    className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
                               >
                                    <img
-                                        src="/path/to/avatar.jpg"
+                                        src={localStorage.getItem("profile_picture") ?? "/public/default_profile.png"}
                                         alt="user"
                                         className="w-full h-full object-cover"
                                    />

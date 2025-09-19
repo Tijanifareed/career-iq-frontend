@@ -16,6 +16,7 @@ import AiResumeFeedbackPage from "../features/resume/AiResumeFeedback"
 import ForgotPassword from "../features/auth/ForgotPassword"
 import VerifyResetCode from "../features/auth/VerifyResetCode"
 import ResetPassword from "../features/auth/ResetPassword";
+import ProfilePage from "../features/profile/Profile"
 
 export default function AppRouter() {
   return (
@@ -38,6 +39,9 @@ export default function AppRouter() {
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
         <Route path="/verify-code" element={<VerifyResetCode/>}/>
         <Route path="/reset-password" element={<ResetPassword/>}/>
+        <Route path="/my-profile" element={<ProfilePage/>}/>
+
+
       </Routes>
     </BrowserRouter>
   );

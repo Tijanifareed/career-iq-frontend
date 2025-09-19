@@ -72,40 +72,40 @@ export default function AddApplicationWeb() {
   return (
     <div className="flex min-h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
-      
-       <div className="hidden md:block w-64 flex-shrink-0 fixed top-0 left-0 h-screen border-r bg-white">
-    <Sidebar />
-  </div>
+
+      <div className="hidden md:block w-64 flex-shrink-0 fixed top-0 left-0 h-screen border-r bg-white">
+        <Sidebar />
+      </div>
 
       <div className="flex-1 flex flex-col md:pl-64 h-screen">
-  {/* Navbar */}
-  <div className="sticky top-0 z-10 flex justify-between items-center px-4 md:px-6 py-2 bg-white border-b">
-    {/* Back icon (mobile only) */}
-    <button
-      onClick={() => navigate(-1)}
-      className="md:hidden text-gray-600 mr-2"
-    >
-      <FaArrowLeft size={18} />
-    </button>
+        {/* Navbar */}
+        <div className="sticky top-0 z-10 flex justify-between items-center px-4 md:px-6 py-2 bg-white border-b">
+          {/* Back icon (mobile only) */}
+          <button
+            onClick={() => navigate(-1)}
+            className="md:hidden text-gray-600 mr-2"
+          >
+            <FaArrowLeft size={18} />
+          </button>
 
-    <div className="flex-1 flex justify-end items-center">
-     
+          <div className="flex-1 flex justify-end items-center">
 
-      <button
-        onClick={() => navigate("/profile")}
-        className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
-      >
-        <img
-          src="/path/to/avatar.jpg"
-          alt="user"
-          className="w-full h-full object-cover"
-        />
-      </button>
-    </div>
-  </div>
+
+            <button
+              onClick={() => navigate("/my-profile")}
+              className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
+            >
+              <img
+              src={localStorage.getItem("profile_picture")??"/public/default_profile.png"}
+                alt="user"
+                className="w-full h-full object-cover"
+              />
+            </button>
+          </div>
+        </div>
 
         {/* Main Form */}
-<main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-6 overflow-y-auto">
           <div className="max-w-5xl mx-auto bg-white rounded-lg shadow p-6">
             <h1 className="text-2xl font-semibold mb-1">Add New Application</h1>
             <p className="text-gray-500 mb-6">

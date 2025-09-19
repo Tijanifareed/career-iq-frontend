@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaSearch, FaHome, FaFileAlt, FaRobot, FaComments, FaPlus } from "react-icons/fa";
+import { FaSearch, FaHome, FaFileAlt, FaRobot, FaComments, FaPlus, FaUser } from "react-icons/fa";
 import { useApplications } from "../../queries/applications";
 import ApplicationsFilter from "../../components/ApplicationsFilter";
 import ApplicationCardMobile from "../../components/ApplicationCardMobile";
@@ -36,11 +36,11 @@ export default function ApplicationsMobile() {
           Applications List
         </h1>
         <button
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate("/my-profile")}
           className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
         >
           <img
-            src="/path/to/avatar.jpg"
+              src={localStorage.getItem("profile_picture")??"/public/default_profile.png"}
             alt="user"
             className="w-full h-full object-cover"
           />
@@ -97,7 +97,7 @@ export default function ApplicationsMobile() {
         <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" location={location} />
         <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" location={location} />
         <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" location={location} />
-        <NavItem label="Interview" icon={<FaComments />} to="/interview" location={location} />
+        <NavItem label="Profile" icon={<FaUser />} to="/interview" location={location} />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useAnalyzeResume } from "../../queries/useAnalyzeResume";
 import Ticker from "../../components/TickerComponent";
-import { FaSearch, FaHome, FaFileAlt, FaRobot, FaComments, FaPlus } from "react-icons/fa";
+import { FaSearch, FaHome, FaFileAlt, FaRobot, FaPlus, FaUser } from "react-icons/fa";
 
 
 type AnalyzeResponse = {
@@ -111,7 +111,7 @@ export default function AiResumeFeedbackWeb() {
               className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
             >
               <img
-                src="/path/to/avatar.jpg"
+              src={localStorage.getItem("profile_picture")??"/public/default_profile.png"}
                 alt="user avatar"
                 className="w-full h-full object-cover"
               />
@@ -349,7 +349,7 @@ export default function AiResumeFeedbackWeb() {
         <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" location={location} />
         <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" location={location} />
         <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" location={location} />
-        <NavItem label="Interview" icon={<FaComments />} to="/interview" location={location} />
+        <NavItem label="Profile" icon={<FaUser />} to="/my-profile" location={location}/>
       </div>
     </div>
   );

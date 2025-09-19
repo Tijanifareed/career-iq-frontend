@@ -13,6 +13,7 @@ import {
   FaFileAlt,
   FaRobot,
   FaComments,
+  FaUser 
 } from "react-icons/fa";
 
 import { useDashboardStats, useRecentApplications } from "../../queries/dashboard";
@@ -52,11 +53,11 @@ export default function DashboardMobile() {
           Dashboard Overview
         </h1>
         <button
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate("/my-profile")}
           className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
         >
           <img
-            src="/path/to/avatar.jpg"
+            src={localStorage.getItem("profile_picture")??"/public/default_profile.png"}
             alt="user"
             className="w-full h-full object-cover"
           />
@@ -140,7 +141,7 @@ export default function DashboardMobile() {
         <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" />
         <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" />
         <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" />
-        <NavItem label="Interview" icon={<FaComments />} to="/interview" />
+        <NavItem label="Profile" icon={<FaUser />} to="/my-profile" />
 
       </div>
     </div>

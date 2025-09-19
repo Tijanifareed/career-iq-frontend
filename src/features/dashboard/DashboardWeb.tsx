@@ -37,20 +37,20 @@ export default function DashboardWeb() {
 
 
   const handleRecentClick = async (id: number) => {
-  try {
-    setFetching(true);
+    try {
+      setFetching(true);
 
-    // axios handles tokens + refresh automatically
-    const res = await api.get(`/applications/my-applications/${id}`);
+      // axios handles tokens + refresh automatically
+      const res = await api.get(`/applications/my-applications/${id}`);
 
-    navigate(`/applications/${id}`, { state: { application: res.data.data } });
-  } catch (err) {
-    console.error(err);
-    alert("Unable to load application details. Please try again.");
-  } finally {
-    setFetching(false);
-  }
-};
+      navigate(`/applications/${id}`, { state: { application: res.data.data } });
+    } catch (err) {
+      console.error(err);
+      alert("Unable to load application details. Please try again.");
+    } finally {
+      setFetching(false);
+    }
+  };
 
 
   return (
@@ -64,16 +64,19 @@ export default function DashboardWeb() {
       <div className="flex-1 flex flex-col pl-64">
         {/* Sticky Navbar */}
         <div className="sticky top-0 z-20 flex justify-between items-center px-6 py-2 bg-white border-b shadow-sm">
-          
-          <Ticker />
-        
+
+          <div className="flex-1">
+            <Ticker />
+          </div>
+
+
 
           <button
-            onClick={() => navigate("/profile")}
+            onClick={() => navigate("/my-profile")}
             className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
           >
             <img
-              src="/path/to/avatar.jpg"
+              src={localStorage.getItem("profile_picture")??"/default_profile.png"}
               alt="user"
               className="w-full h-full object-cover"
             />

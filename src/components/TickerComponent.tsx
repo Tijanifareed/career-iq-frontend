@@ -1,196 +1,4 @@
-// import React, { useEffect, useState } from "react";
-// import api from "../apis/api";
 
-// const motivationalQuotes = [
-//   "Stay positive, work hard, make it happen 💪",
-//   "Your dream job is closer than you think 🚀",
-//   "Every rejection is redirection 🔄",
-//   "Consistency beats intensity 🌱",
-//   "Believe in yourself — recruiters can tell 🌟",
-//   "One application today could change everything ✨",
-//   "Skills + persistence = job offer 🔑",
-//   "Don’t wait for opportunity, create it ⚡",
-//   "Every interview is practice for the big one 🎯",
-//   "Your value isn’t defined by rejections 💼",
-//   "Keep applying, keep growing 🌍",
-//   "Small progress every day adds up 📈",
-//   "Courage is showing up, even when it’s tough 💥",
-//   "Someone is hiring for your exact skills 🧩",
-//   "Your future self will thank you for not quitting 🙌",
-//   "Dreams don’t work unless you do 🔨",
-//   "Keep learning, keep earning 📚",
-//   "Today’s effort is tomorrow’s success 🌞",
-//   "The best opportunities come when you least expect them 🎁",
-//   "Believe: the right company is looking for YOU 🔍",
-// ];
-
-
-// const Ticker: React.FC = () => {
-//   const [messages, setMessages] = useState<string[]>([]);
-//   const [currentIndex, setCurrentIndex] = useState(0);
-
-//   useEffect(() => {
-//     const fetchMessage = async () => {
-//       try {
-//         const res = await api.get("/applications/upcoming-interview");
-//         if (res.data?.message) {
-//           // If backend gives an interview → only show that
-//           setMessages([res.data.message]);
-//         } else {
-//           // Otherwise → shuffle quotes for variety
-//           setMessages([...motivationalQuotes].sort(() => Math.random() - 0.5));
-//         }
-//       } catch (err) {
-//         console.error("Failed to fetch interview:", err);
-//         // fallback to quotes
-//         setMessages([...motivationalQuotes].sort(() => Math.random() - 0.5));
-//       }
-//     };
-
-//     fetchMessage();
-//   }, []);
-
-//   useEffect(() => {
-//     if (messages.length > 1) {
-//       const interval = setInterval(() => {
-//         setCurrentIndex((prev) => (prev + 1) % messages.length);
-//       }, 4000); // 4 seconds
-//       return () => clearInterval(interval);
-//     }
-//   }, [messages]);
-
-//   if (messages.length === 0) return null;
-
-//   return (
-//     <div className="overflow-hidden w-[400px] whitespace-nowrap">
-//       <div
-//         key={currentIndex}
-//         className="animate-slide text-sm text-gray-700"
-//       >
-//         {messages[currentIndex]}
-//       </div>
-
-//       {/* animation styles */}
-//       <style>
-//         {`
-//           @keyframes slide {
-//             from { transform: translateX(100%); opacity: 0; }
-//             to { transform: translateX(0); opacity: 1; }
-//           }
-//           .animate-slide {
-//             animation: slide 0.5s ease-in-out;
-//           }
-//         `}
-//       </style>
-//     </div>
-//   );
-// };
-
-// export default Ticker;
-
-
-
-// import React, { useEffect, useState, useRef } from "react";
-// import api from "../apis/api";
-
-// const motivationalQuotes = [
-//   "Stay positive, work hard, make it happen 💪",
-//   "Your dream job is closer than you think 🚀",
-//   "Every rejection is redirection 🔄",
-//   "Consistency beats intensity 🌱",
-//   "Believe in yourself — recruiters can tell 🌟",
-//   "One application today could change everything ✨",
-//   "Skills + persistence = job offer 🔑",
-//   "Don’t wait for opportunity, create it ⚡",
-//   "Every interview is practice for the big one 🎯",
-//   "Your value isn’t defined by rejections 💼",
-//   "Keep applying, keep growing 🌍",
-//   "Small progress every day adds up 📈",
-//   "Courage is showing up, even when it’s tough 💥",
-//   "Someone is hiring for your exact skills 🧩",
-//   "Your future self will thank you for not quitting 🙌",
-//   "Dreams don’t work unless you do 🔨",
-//   "Keep learning, keep earning 📚",
-//   "Today’s effort is tomorrow’s success 🌞",
-//   "The best opportunities come when you least expect them 🎁",
-//   "Believe: the right company is looking for YOU 🔍",
-// ];
-
-// const Ticker: React.FC = () => {
-//   const [messages, setMessages] = useState<string[]>([]);
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const [duration, setDuration] = useState(10); // seconds
-//   const containerRef = useRef<HTMLDivElement>(null);
-//   const textRef = useRef<HTMLDivElement>(null);
-
-//   useEffect(() => {
-//     const fetchMessage = async () => {
-//       try {
-//         const res = await api.get("/applications/upcoming-interview");
-//         if (res.data?.message) {
-//           setMessages([res.data.message]);
-//         } else {
-//           // randomize quotes
-//           setMessages([...motivationalQuotes].sort(() => Math.random() - 0.5));
-//         }
-//       } catch (err) {
-//         console.error("Failed to fetch interview:", err);
-//         setMessages([...motivationalQuotes].sort(() => Math.random() - 0.5));
-//       }
-//     };
-//     fetchMessage();
-//   }, []);
-
-//   // Adjust scroll duration based on text length
-//   useEffect(() => {
-//     if (containerRef.current && textRef.current) {
-//       const containerWidth = containerRef.current.offsetWidth;
-//       const textWidth = textRef.current.scrollWidth;
-
-//       // speed factor: pixels per second
-//       const speed = 80;
-//       const newDuration = (containerWidth + textWidth) / speed;
-//       setDuration(newDuration);
-//     }
-//   }, [messages, currentIndex]);
-
-//   // Handle animation end → switch to next message
-//   const handleAnimationEnd = () => {
-//     setCurrentIndex((prev) => (prev + 1) % messages.length);
-//   };
-
-//   if (messages.length === 0) return null;
-
-//   return (
-//     <div
-//       ref={containerRef}
-//       className="w-full max-w-[500px] overflow-hidden whitespace-nowrap border-b border-gray-200"
-//     >
-//       <div
-//         key={currentIndex}
-//         ref={textRef}
-//         className="inline-block text-sm sm:text-base text-gray-700"
-//         style={{
-//           animation: `scroll ${duration}s linear forwards`,
-//         }}
-//         onAnimationEnd={handleAnimationEnd}
-//       >
-//         {messages[currentIndex]}
-//       </div>
-
-//       <style>
-//         {`
-//           @keyframes scroll {
-//             from { transform: translateX(100%); }
-//             to { transform: translateX(-100%); }
-//           }
-//         `}
-//       </style>
-//     </div>
-//   );
-// };
-
-// export default Ticker;
 
 // src/components/TickerComponent.tsx
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -233,33 +41,80 @@ const Ticker: React.FC = () => {
   const textRef = useRef<HTMLDivElement | null>(null);
 
   // Fetch interview message / fallback to quotes
-  useEffect(() => {
-    let mounted = true;
-    const fetchMessage = async () => {
-      try {
-        const res = await api.get("/applications/upcoming-interview");
-        if (!mounted) return;
-        if (res.data?.message) {
-          setMessages([res.data.message]);
-        } else {
-          setMessages(shuffle(motivationalQuotes));
-        }
+
+useEffect(() => {
+  let mounted = true;
+
+  const fetchMessage = async () => {
+    const now = Date.now();
+    const TWO_MINUTES = 2 * 60 * 1000;
+
+    const lastFetch = parseInt(localStorage.getItem("lastInterviewFetch") || "0", 10);
+    const cachedMessage = localStorage.getItem("lastInterviewMessage");
+
+    // ✅ If still fresh (whether interview or fallback), use cached
+    if (now - lastFetch < TWO_MINUTES) {
+      console.log("Using cached:", cachedMessage || "fallback quotes");
+      if (mounted) {
+        setMessages(cachedMessage ? [cachedMessage] : shuffle(motivationalQuotes));
         setCurrentIndex(0);
         setAnimKey((k) => k + 1);
-      } catch (err) {
-        console.error("Failed to fetch interview:", err);
-        if (!mounted) return;
+      }
+      return;
+    }
+
+    // ✅ Otherwise call API
+    try {
+      const res = await api.get("/applications/upcoming-interview");
+      if (!mounted) return;
+
+      if (res.data?.message) {
+        const msg = res.data.message;
+        setMessages([msg]);
+        setCurrentIndex(0);
+        setAnimKey((k) => k + 1);
+
+        // save to cache
+        localStorage.setItem("lastInterviewMessage", msg);
+        localStorage.setItem("lastInterviewFetch", String(now));
+      } else {
+        // mark fetch time even if no interview
+        localStorage.removeItem("lastInterviewMessage");
+        localStorage.setItem("lastInterviewFetch", String(now));
+
+        // fallback
         setMessages(shuffle(motivationalQuotes));
         setCurrentIndex(0);
         setAnimKey((k) => k + 1);
       }
-    };
+    } catch (err) {
+      console.error("Failed to fetch interview:", err);
+      if (!mounted) return;
 
-    fetchMessage();
-    return () => {
-      mounted = false;
-    };
-  }, []);
+      // fallback to cache first, then quotes
+      if (cachedMessage) {
+        setMessages([cachedMessage]);
+      } else {
+        setMessages(shuffle(motivationalQuotes));
+      }
+      setCurrentIndex(0);
+      setAnimKey((k) => k + 1);
+
+      // still update timestamp so we don’t hammer the server
+      localStorage.setItem("lastInterviewFetch", String(now));
+    }
+  };
+
+  fetchMessage();
+
+  return () => {
+    mounted = false;
+  };
+}, []);
+
+
+
+
 
   // Measure widths and update CSS vars BEFORE paint for smooth animation
   useLayoutEffect(() => {
