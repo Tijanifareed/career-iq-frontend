@@ -40,9 +40,8 @@ export default function Sidebar() {
             <button
               key={item.id}
               onClick={() => navigate(item.path)}
-              className={`flex items-center gap-3 px-3 py-2 rounded-md text-left hover:bg-gray-100 transition ${
-                active ? "bg-gray-100 font-semibold font-inter" : ""
-              }`}
+              className={`flex items-center gap-3 px-3 py-2 rounded-md text-left hover:bg-gray-100 transition ${active ? "bg-gray-100 font-semibold font-inter" : ""
+                }`}
             >
               <span className="text-lg">{item.icon}</span>
               <span>{item.label}</span>
@@ -53,6 +52,17 @@ export default function Sidebar() {
 
       {/* LOGOUT + BRAND */}
       <div className="flex flex-col gap-4">
+        <button
+          disabled
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md bg-customBlue text-white opacity-80 cursor-not-allowed relative overflow-hidden"
+        >
+          <span className="relative z-10">🚀 Upgrade</span>
+          <span className="text-xs italic relative z-10">(Coming Soon)</span>
+
+          {/* Shining overlay */}
+          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-slide" />
+        </button>
+
         {/* Logout button */}
         <button
           onClick={handleLogout}

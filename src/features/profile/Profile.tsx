@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProfileWeb from "./ProfileWeb";
+import ProfileMobile from "./ProfileMobile";
 
 
 export default function ProfilePage() {
@@ -13,5 +14,5 @@ export default function ProfilePage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return isMobile ? <ProfileWeb /> : <ProfileWeb />;
+  return isMobile ? <ProfileMobile /> : <ProfileWeb />;
 }

@@ -107,7 +107,7 @@ export default function AiResumeFeedbackWeb() {
           {/* Right side (avatar) */}
           <div className="flex items-center">
             <button
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/my-profile")}
               className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
             >
               <img

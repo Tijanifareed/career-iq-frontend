@@ -18,7 +18,7 @@ export default function CallToAction() {
           onClick={() => navigate("/signup")}
           className="w-full sm:w-auto px-8 py-4 bg-customBlue text-customOffBlue font-semibold text-lg rounded-md shadow-md hover:bg-blue-400 transition"
         >
-          Start Your Free Trial Today!
+          Start Your Journey Today!
         </button>
       </div>
     </section>
