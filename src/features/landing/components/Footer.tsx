@@ -72,7 +72,6 @@ export default function Footer() {
           <a href="https://twitter.com" className="hover:text-customBlue transition transform hover:scale-110"><FaTwitter /></a>
           <a href="https://linkedin.com" className="hover:text-customBlue transition transform hover:scale-110"><FaLinkedin /></a>
           <a href="https://instagram.com" className="hover:text-customBlue transition transform hover:scale-110"><FaInstagram /></a>
-          <a href="https://github.com" className="hover:text-customBlue transition transform hover:scale-110"><FaGithub /></a>
           <a href="https://facebook.com" className="hover:text-customBlue transition transform hover:scale-110"><FaFacebook /></a>
         </div>
 
