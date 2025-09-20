@@ -194,8 +194,7 @@ export default function AiResumeFeedbackWeb() {
                               }
                               className="text-sm text-blue-600 underline"
                             >
-                              {showExtractPreview ? "Hide" : "Show"} extracted
-                              text preview
+                              {showExtractPreview ? "Hide" : "Show"} resume preview
                             </button>
                             {showExtractPreview && (
                               <pre className="mt-2 p-3 bg-gray-50 border rounded text-sm whitespace-pre-wrap max-h-40 overflow-auto">
