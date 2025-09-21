@@ -50,7 +50,7 @@ const [modalType, setModalType] = useState<"success" | "error">("success");
 
   return (
     <div>
-      <CenterFormWrapper title="CareerIQ" logoSrc="/public/logo.png">
+      <CenterFormWrapper title="CareerIQ" logoSrc="/logo.png">
           <h2 className="text-xl font-bold font-inter text-black text-center mb-1">
           Set Your Time Zone
         </h2>
