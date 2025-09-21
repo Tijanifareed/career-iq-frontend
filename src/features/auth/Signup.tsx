@@ -42,6 +42,7 @@ export default function Signup() {
       console.log(data.data.timezone)
       timezone = data.data.timezone
       setModalMessage(data.message || "Account created successfully");
+      navigate("/login");
       // Redirect to login or dashboard
     } catch (err: any) {
       const message =
