@@ -93,7 +93,7 @@ export default function AiResumeFeedbackWeb() {
       </div>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col md:pl-64 h-screen">
+      <div className="flex-1 flex flex-col md:pl-64 h-screen min-w-0">
         {/* Navbar */}
         <div className="sticky top-0 z-10 flex justify-between items-center px-4 md:px-6 py-2 bg-white border-b">
           {/* Left side placeholder (keeps spacing correct) */}
