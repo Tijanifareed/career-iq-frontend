@@ -282,7 +282,7 @@ export default function AiResumeFeedbackWeb() {
               </div>
 
               {/* Right column */}
-              <aside className="space-y-6">
+              <aside className="space-y-6 w-full">
                 <div className="bg-white rounded-lg shadow p-6">
                   <h4 className="text-md font-medium mb-2">ATS Score</h4>
                   <div className="text-3xl font-semibold text-customBlue">
