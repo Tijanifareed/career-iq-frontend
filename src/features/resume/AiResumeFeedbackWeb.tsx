@@ -86,7 +86,7 @@ export default function AiResumeFeedbackWeb() {
   const suggestions = result?.analysis?.suggestions ?? [];
 
   return (
-    <div className="flex min-h-screen bg-gray-50 overflow-hidden">
+    <div className="flex min-h-screen bg-gray-50 overflow-hidden overflow-x-hidden">
       {/* Sidebar */}
       <div className="hidden md:block w-64 flex-shrink-0 fixed top-0 left-0 h-screen border-r bg-white">
         <Sidebar />
@@ -197,7 +197,7 @@ export default function AiResumeFeedbackWeb() {
                               {showExtractPreview ? "Hide" : "Show"} resume preview
                             </button>
                             {showExtractPreview && (
-                              <pre className="mt-2 p-3 bg-gray-50 border rounded text-sm whitespace-pre-wrap max-h-40 overflow-auto">
+                              <pre className="mt-2 p-3 bg-gray-50 border rounded text-sm whitespace-pre-wrap max-h-40 overflow-auto break-words">
                                 {result.extracted_text_preview}
                               </pre>
                             )}
