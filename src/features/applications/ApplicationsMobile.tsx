@@ -97,7 +97,7 @@ export default function ApplicationsMobile() {
         <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" location={location} />
         <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" location={location} />
         <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" location={location} />
-        <NavItem label="Profile" icon={<FaUser />} to="/interview" location={location} />
+        <NavItem label="Profile" icon={<FaUser />} to="/my-profile" location={location} />
       </div>
     </div>
   );
