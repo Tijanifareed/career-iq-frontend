@@ -166,13 +166,13 @@ export default function AiResumeFeedbackWeb() {
                             <span className="text-sm">Choose file</span>
                           </label>
 
-                          <button
+                          {/* <button
                             type="button"
                             onClick={openGoogleDrivePicker}
                             className="px-4 py-2 border rounded-md text-sm"
                           >
                             Import from Google Drive
-                          </button>
+                          </button> */}
 
                           <div className="text-sm text-gray-500">
                             {selectedFile ? (
