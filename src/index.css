@@ -24,16 +24,33 @@ html::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-/* Keep the root default (block), only flex the inside */
+/* Target the content wrapper inside the popup */
 .react-datepicker__month-container,
 .react-datepicker__time-container {
-  display: inline-block;
-  vertical-align: top;
+  margin: 0; /* remove default margins */
 }
 
-/* Optional: lock time width so it doesn’t squeeze */
-.react-datepicker__time-container {
-  width: 120px;
+.react-datepicker__triangle {
+  display: none; /* optional, hide the arrow if ugly */
 }
+
+/* Flex the internal wrapper (calendar + time) */
+.react-datepicker {
+  display: inline-block !important; /* keep popup size */
+}
+
+.react-datepicker__month-container,
+.react-datepicker__time-container {
+  display: flex;
+}
+
+.react-datepicker__month-container {
+  flex: 1;
+}
+
+.react-datepicker__time-container {
+  flex: 0 0 120px; /* lock sidebar width */
+}
+
 
 
