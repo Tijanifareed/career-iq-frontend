@@ -334,23 +334,8 @@ export default function InterviewDetailsWeb() {
                                              name="interview_date"
                                              rules={{ required: "Interview date is required" }}
                                              render={({ field }) => (
-                                                  // <DatePicker
-                                                  //      className="w-full border rounded-md px-3 py-2"
-                                                  //      selected={field.value}
-                                                  //      onChange={(date) => field.onChange(date ? new Date(date) : null)}
-                                                  //      placeholderText="Select date & time"
-                                                  //      showTimeSelect
-                                                  //      timeIntervals={15}
-                                                  //      timeCaption="Time"
-                                                  //      dateFormat="yyyy-MM-dd HH:mm"
-                                                  //      customInput={<CustomInput placeholder="Select date & time" />}
-                                                  //      withPortal={isMobile} // ✅ works after upgrade
-                                                  //      {...(!isMobile && {
-                                                  //           customInput: <CustomInput placeholder="Select date & time" />,
-                                                  //           popperPlacement: "bottom-start",
-                                                  //      })}
-                                                  // />
                                                   <DatePicker
+                                                       className="w-full border rounded-md px-3 py-2"
                                                        selected={field.value}
                                                        onChange={(date) => field.onChange(date ? new Date(date) : null)}
                                                        placeholderText="Select date & time"
@@ -358,14 +343,13 @@ export default function InterviewDetailsWeb() {
                                                        timeIntervals={15}
                                                        timeCaption="Time"
                                                        dateFormat="yyyy-MM-dd HH:mm"
-                                                       withPortal={isMobile}
-                                                       className={isMobile ? "w-full border rounded-md px-3 py-2" : ""}
+                                                       customInput={<CustomInput placeholder="Select date & time" />}
+                                                       withPortal={isMobile} // ✅ works after upgrade
                                                        {...(!isMobile && {
                                                             customInput: <CustomInput placeholder="Select date & time" />,
                                                             popperPlacement: "bottom-start",
                                                        })}
                                                   />
-
                                              )}
                                         />
 
