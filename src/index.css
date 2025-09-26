@@ -24,32 +24,21 @@ html::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-/* Target the content wrapper inside the popup */
+/* Force calendar + time container to sit side by side */
 .react-datepicker__month-container,
 .react-datepicker__time-container {
-  margin: 0; /* remove default margins */
+  display: inline-block;
+  vertical-align: top;
 }
 
-.react-datepicker__triangle {
-  display: none; /* optional, hide the arrow if ugly */
+/* Lock time sidebar width */
+.react-datepicker__time-container {
+  width: 120px;
 }
 
-/* Flex the internal wrapper (calendar + time) */
+/* Make sure the overall datepicker doesn’t stretch full width */
 .react-datepicker {
-  display: inline-block !important; /* keep popup size */
-}
-
-.react-datepicker__month-container,
-.react-datepicker__time-container {
-  display: flex;
-}
-
-.react-datepicker__month-container {
-  flex: 1;
-}
-
-.react-datepicker__time-container {
-  flex: 0 0 120px; /* lock sidebar width */
+  display: inline-block !important;
 }
 
 
