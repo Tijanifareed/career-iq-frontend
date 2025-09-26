@@ -24,17 +24,16 @@ html::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-.react-datepicker {
-  display: flex !important;
-  flex-direction: row !important;
-}
-
-.react-datepicker__month-container {
-  flex: 1;
-}
-
+/* Keep the root default (block), only flex the inside */
+.react-datepicker__month-container,
 .react-datepicker__time-container {
-  flex: 0 0 120px; /* lock width */
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Optional: lock time width so it doesn’t squeeze */
+.react-datepicker__time-container {
+  width: 120px;
 }
 
 
