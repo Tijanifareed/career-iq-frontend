@@ -345,12 +345,12 @@ export default function InterviewDetailsWeb() {
                                                        dateFormat="yyyy-MM-dd HH:mm"
                                                        customInput={<CustomInput placeholder="Select date & time" />}
                                                        withPortal={isMobile}
+                                                       // 👇 only apply desktop props when not mobile
                                                        {...(!isMobile && {
+                                                            customInput: <CustomInput placeholder="Select date & time" />,
                                                             popperPlacement: "bottom-start",
                                                             popperProps: { strategy: "fixed" },
                                                        })}
-                                                       popperProps={{ strategy: "fixed" }}
-                                                       popperPlacement="bottom-start"
                                                   />
                                              )}
                                         />
