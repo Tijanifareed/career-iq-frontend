@@ -24,6 +24,17 @@ html::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
+.react-datepicker {
+  display: flex !important;
+  flex-direction: row !important;
+}
 
+.react-datepicker__month-container {
+  flex: 1;
+}
+
+.react-datepicker__time-container {
+  flex: 0 0 120px; /* lock width */
+}
 
 
