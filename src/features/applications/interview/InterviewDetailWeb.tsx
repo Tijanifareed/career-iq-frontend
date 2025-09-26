@@ -335,7 +335,7 @@ export default function InterviewDetailsWeb() {
                                              rules={{ required: "Interview date is required" }}
                                              render={({ field }) => (
                                                   <DatePicker
-                                                       className="w-full"
+                                                       className="w-full border rounded-md px-3 py-2"
                                                        selected={field.value}
                                                        onChange={(date) => field.onChange(date ? new Date(date) : null)}
                                                        placeholderText="Select date & time"
@@ -345,6 +345,10 @@ export default function InterviewDetailsWeb() {
                                                        dateFormat="yyyy-MM-dd HH:mm"
                                                        customInput={<CustomInput placeholder="Select date & time" />}
                                                        withPortal={isMobile}
+                                                       {...(!isMobile && {
+                                                            popperPlacement: "bottom-start",
+                                                            popperProps: { strategy: "fixed" },
+                                                       })}
                                                        popperProps={{ strategy: "fixed" }}
                                                        popperPlacement="bottom-start"
                                                   />
