@@ -89,62 +89,62 @@ export default function AiResumeFeedbackWeb() {
   type InputMode = "manual" | "image" | "url";
 
   const [inputMode, setInputMode] = useState<InputMode>("manual");
-const [urlInput, setUrlInput] = useState("");
-const [isExtracting, setIsExtracting] = useState(false);
-const [extractError, setExtractError] = useState<string | null>(null);
+  const [urlInput, setUrlInput] = useState("");
+  const [isExtracting, setIsExtracting] = useState(false);
+  const [extractError, setExtractError] = useState<string | null>(null);
 
-async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-  const file = e.target.files?.[0];
-  if (!file) return;
-  setIsExtracting(true);
-  setExtractError(null);
-  try {
-    const formData = new FormData();
-    formData.append("files", file);
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsExtracting(true);
+    setExtractError(null);
+    try {
+      const formData = new FormData();
+      formData.append("files", file);
 
-    const res = await api.post("/get-jd-from/image", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+      const res = await api.post("/get-jd-from/image", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    const jd = res.data?.job_description;
-    if (jd) {
-      setJobDescription((prev) => prev + "\n\n" + jd);
+      const jd = res.data?.job_description;
+      if (jd) {
+        setJobDescription((prev) => prev + "\n\n" + jd);
+      }
+    } catch (err) {
+      console.error("Failed to extract JD from image", err);
+      setExtractError("Could not extract text from image.");
+    } finally {
+      setIsExtracting(false);
     }
-  } catch (err) {
-    console.error("Failed to extract JD from image", err);
-    setExtractError("Could not extract text from image.");
-  } finally {
-    setIsExtracting(false);
   }
-}
-function handleResetAll() {
-  handleReset(); // your existing reset
-  setInputMode("manual");
-  setUrlInput("");
-  setExtractError(null);
-}
+  function handleResetAll() {
+    handleReset(); // your existing reset
+    setInputMode("manual");
+    setUrlInput("");
+    setExtractError(null);
+  }
 
-async function handleUrlExtract() {
-  if (!urlInput.trim()) return;
-  setIsExtracting(true);
-  setExtractError(null);
-  try {
-    const res = await api.post("/get-jd-from/url", { url: urlInput });
-    const jd = res.data?.job_description;
-    if (jd) {
-      setJobDescription((prev) => prev + "\n\n" + jd);
-    } else {
+  async function handleUrlExtract() {
+    if (!urlInput.trim()) return;
+    setIsExtracting(true);
+    setExtractError(null);
+    try {
+      const res = await api.post("/get-jd-from/url", { url: urlInput });
+      const jd = res.data?.job_description;
+      if (jd) {
+        setJobDescription((prev) => prev + "\n\n" + jd);
+      } else {
+        setJobDescription("");
+        setExtractError("This job board doesn’t support direct import yet – upload a screenshot instead 🚀");
+      }
+    } catch (err) {
+      console.error("Failed to extract JD from URL", err);
       setJobDescription("");
       setExtractError("This job board doesn’t support direct import yet – upload a screenshot instead 🚀");
+    } finally {
+      setIsExtracting(false);
     }
-  } catch (err) {
-    console.error("Failed to extract JD from URL", err);
-    setJobDescription("");
-    setExtractError("This job board doesn’t support direct import yet – upload a screenshot instead 🚀");
-  } finally {
-    setIsExtracting(false);
   }
-}
 
   return (
     <div className="flex min-h-screen bg-gray-50 overflow-hidden overflow-x-hidden">
@@ -172,7 +172,7 @@ async function handleUrlExtract() {
               className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
             >
               <img
-              src={localStorage.getItem("profile_picture")??"/public/default_profile.png"}
+                src={localStorage.getItem("profile_picture") ?? "/public/default_profile.png"}
                 alt="user avatar"
                 className="w-full h-full object-cover"
               />
@@ -271,97 +271,98 @@ async function handleUrlExtract() {
 
                 {/* Job Description */}
                 <div className="bg-white rounded-lg shadow p-6">
-  <h3 className="text-lg font-medium mb-2">Job Description</h3>
+                  <h3 className="text-lg font-medium mb-2">Job Description</h3>
 
-  {/* Mode selector */}
-  <div className="mb-4">
-    <label className="text-sm text-gray-600 mr-2">Import options:</label>
-    <select
-      value={inputMode}
-      onChange={(e) => setInputMode(e.target.value as InputMode)}
-      className="border rounded px-2 py-1 text-sm"
-    >
-      <option value="manual">Paste Manually</option>
-      <option value="image">Upload Screenshot</option>
-      <option value="url">Enter URL</option>
-    </select>
-  </div>
+                  {/* Mode selector */}
+                  <div className="mb-4">
+                    <label className="text-sm text-gray-600 mr-2">Import options:</label>
+                    <select
+                      value={inputMode}
+                      onChange={(e) => setInputMode(e.target.value as InputMode)}
+                      className="border rounded px-2 py-1 text-sm"
+                    >
+                      <option value="manual">Paste Manually</option>
+                      <option value="image">Upload Screenshot</option>
+                      <option value="url">Enter URL</option>
+                    </select>
+                  </div>
 
-  {/* Mode-specific inputs */}
-  {inputMode === "image" && (
-    <div className="mb-4">
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        disabled={isExtracting || inputMode !== "image"}
-      />
-      {isExtracting && (
-        <p className="text-sm text-blue-600 mt-2">
-          Extracting job description from your screenshot... this might take up to a minute 🚀
-        </p>
-      )}
-    </div>
-  )}
+                  {/* Mode-specific inputs */}
+                  {inputMode === "image" && (
+                    <div className="mb-4">
+                      <p className="text-xs font-inter mb-2 text-customBlue">Note: For best results, upload a clear, cropped screenshot with only the job description. Keep the file size small and remove extra icons or text to improve speed and accuracy.</p>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        disabled={isExtracting || inputMode !== "image"}
+                      />
+                      {isExtracting && (
+                        <p className="text-sm text-blue-600 mt-2">
+                          Extracting job description from your screenshot... this might take up to a minute 🚀
+                        </p>
+                      )}
+                    </div>
+                  )}
 
-  {inputMode === "url" && (
-    <div className="mb-4">
-      <input
-        type="text"
-        value={urlInput}
-        onChange={(e) => setUrlInput(e.target.value)}
-        placeholder="Enter job posting URL"
-        className="w-full border rounded px-3 py-2 text-sm"
-        disabled={isExtracting || inputMode !== "url"}
-      />
-      <button
-        type="button"
-        onClick={handleUrlExtract}
-        disabled={isExtracting}
-        className="mt-2 px-3 py-1 bg-customBlue text-white rounded text-sm disabled:opacity-50"
-      >
-        {isExtracting ? "Extracting..." : "Import from URL"}
-      </button>
-    </div>
-  )}
+                  {inputMode === "url" && (
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        value={urlInput}
+                        onChange={(e) => setUrlInput(e.target.value)}
+                        placeholder="Enter job posting URL"
+                        className="w-full border rounded px-3 py-2 text-sm"
+                        disabled={isExtracting || inputMode !== "url"}
+                      />
+                      <button
+                        type="button"
+                        onClick={handleUrlExtract}
+                        disabled={isExtracting}
+                        className="mt-2 px-3 py-1 bg-customBlue text-white rounded text-sm disabled:opacity-50"
+                      >
+                        {isExtracting ? "Extracting..." : "Import from URL"}
+                      </button>
+                    </div>
+                  )}
 
-  {/* Main textarea */}
-  <textarea
-    value={jobDescription}
-    onChange={(e) => setJobDescription(e.target.value)}
-    rows={6}
-    placeholder="Paste the job description here..."
-    className="w-full border rounded-md px-3 py-2 focus:outline-none"
-    disabled={isExtracting}
-  />
-  <p className="text-sm text-gray-500 mt-2">
-    AI will analyze your resume against this description.
-  </p>
+                  {/* Main textarea */}
+                  <textarea
+                    value={jobDescription}
+                    onChange={(e) => setJobDescription(e.target.value)}
+                    rows={6}
+                    placeholder="Paste the job description here..."
+                    className="w-full border rounded-md px-3 py-2 focus:outline-none"
+                    disabled={isExtracting}
+                  />
+                  <p className="text-sm text-gray-500 mt-2">
+                    AI will analyze your resume against this description.
+                  </p>
 
-  {extractError && (
-    <div className="text-red-500 text-sm mt-2">{extractError}</div>
-  )}
+                  {extractError && (
+                    <div className="text-red-500 text-sm mt-2">{extractError}</div>
+                  )}
 
-  {/* Actions */}
-  <div className="mt-4 flex items-center gap-3">
-    <button
-      type="button"
-      onClick={handleAnalyze}
-      disabled={loading}
-      className="px-4 py-2 bg-customBlue text-white rounded-md disabled:opacity-50"
-    >
-      {loading ? "Analyzing..." : "Analyze Resume"}
-    </button>
+                  {/* Actions */}
+                  <div className="mt-4 flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={handleAnalyze}
+                      disabled={loading}
+                      className="px-4 py-2 bg-customBlue text-white rounded-md disabled:opacity-50"
+                    >
+                      {loading ? "Analyzing..." : "Analyze Resume"}
+                    </button>
 
-    <button
-      type="button"
-      onClick={handleResetAll}
-      className="px-4 py-2 border rounded-md"
-    >
-      Reset
-    </button>
-  </div>
-</div>
+                    <button
+                      type="button"
+                      onClick={handleResetAll}
+                      className="px-4 py-2 border rounded-md"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
 
 
                 {/* Analysis summary */}
@@ -463,7 +464,7 @@ async function handleUrlExtract() {
         <NavItem label="Dashboard" icon={<FaHome />} to="/dashboard" location={location} />
         <NavItem label="Applications" icon={<FaFileAlt />} to="/applications" location={location} />
         <NavItem label="Resume AI" icon={<FaRobot />} to="/ai/resume/feedback" location={location} />
-        <NavItem label="Profile" icon={<FaUser />} to="/my-profile" location={location}/>
+        <NavItem label="Profile" icon={<FaUser />} to="/my-profile" location={location} />
       </div>
     </div>
   );
