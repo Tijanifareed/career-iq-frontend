@@ -25,27 +25,24 @@ html::-webkit-scrollbar-thumb {
 }
 
 /* Root popup stays inline-block */
+/* Force side-by-side layout */
 .react-datepicker {
-  display: inline-block !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
 }
 
-/* Place month + time side by side */
-.react-datepicker__month-container,
+/* Calendar */
+.react-datepicker__month-container {
+  flex: 1 1 auto !important;
+}
+
+/* Time sidebar */
 .react-datepicker__time-container {
-  display: inline-block;
-  vertical-align: top;
+  flex: 0 0 120px !important;
+  margin-left: 8px !important;
+  position: relative !important; /* cancel out absolute positioning */
 }
 
-/* Lock time sidebar width */
-.react-datepicker__time-container {
-  width: 120px;
-  margin-left: 8px; /* add a little spacing from calendar */
-}
-
-/* Prevent time list from stretching */
-.react-datepicker__time {
-  width: 100%;
-  box-sizing: border-box;
-}
 
 
