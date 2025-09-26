@@ -313,7 +313,7 @@ export default function InterviewDetailsWeb() {
                                    onClick={() => navigate("/my-profile")}
                                    className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
                               >
-                                   <img src="/path/to/avatar.jpg" alt="user" className="w-full h-full object-cover" />
+                                   <img src={localStorage.getItem("profile_picture")??"/default_profile.png"} alt="user" className="w-full h-full object-cover" />
                               </button>
                          </div>
                     </div>

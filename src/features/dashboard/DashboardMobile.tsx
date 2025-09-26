@@ -44,6 +44,7 @@ export default function DashboardMobile() {
       setFetching(false);
     }
   };
+  const profile_picture = localStorage.getItem("profile_picture") ?? "/default_profile.png";
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-16">
@@ -57,7 +58,7 @@ export default function DashboardMobile() {
           className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
         >
           <img
-            src={localStorage.getItem("profile_picture")??"/default_profile.png"}
+            src={profile_picture}
             alt="user"
             className="w-full h-full object-cover"
           />
