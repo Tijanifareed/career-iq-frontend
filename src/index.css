@@ -27,6 +27,7 @@ html::-webkit-scrollbar-thumb {
 /* Root popup stays inline-block */
 /* Force side-by-side layout */
 .react-datepicker {
+  max-width: 420px !important;
   display: flex !important;
   flex-direction: row !important;
   align-items: flex-start !important;
@@ -39,7 +40,7 @@ html::-webkit-scrollbar-thumb {
 
 /* Time sidebar */
 .react-datepicker__time-container {
-  flex: 0 0 120px !important;
+  flex: 0 0 100px !important; 
   margin-left: 8px !important;
   position: relative !important; /* cancel out absolute positioning */
 }
