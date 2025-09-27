@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import api from "../../apis/api";
 import { getTimezoneAbbr } from "../../components/timezoneEnum";
+import Ticker from "../../components/TickerComponent";
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
@@ -168,9 +169,21 @@ export default function ProfileMobile() {
      return (
           <div className="flex flex-col min-h-screen bg-gray-50 pb-14">
                {/* Header */}
-               <div className="sticky top-0 z-10 bg-white border-b shadow-sm p-4 text-center font-semibold text-lg">
-                    Profile
-               </div>
+               <header className="sticky top-0 z-20">
+  {/* Navbar */}
+  <div className="flex items-center justify-between px-4 py-3 bg-white border-b">
+    <h1 className="text-lg font-semibold text-center flex-1">Dashboard Overview</h1>
+
+    
+  </div>
+
+  {/* Ticker immediately under the navbar (sticky together) */}
+  <div className="w-full bg-white border-b flex justify-center items-center py-2">
+    <div className="max-w-[80%] text-center font-inter italic">
+      <Ticker />
+    </div>
+  </div>
+</header>
 
                {/* Main content */}
                <div className="flex-1 flex flex-col items-center p-6">
