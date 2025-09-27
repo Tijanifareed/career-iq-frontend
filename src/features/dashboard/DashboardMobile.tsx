@@ -58,7 +58,7 @@ const validProfilePic =
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-16">
       {/* Top Navbar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-white border-b sticky top-0 z-10">
+      {/* <div className="flex items-center justify-between px-4 py-3 bg-white border-b sticky top-0 z-10">
         <h1 className="text-lg font-semibold text-center flex-1">
           Dashboard Overview
         </h1>
@@ -74,10 +74,34 @@ const validProfilePic =
         </button>
       </div>
       <div className="w-full bg-white border-b flex justify-center items-center py-2">
-        <div className="max-w-[80%] text-center font-inter italic">
+        <div className="max-w-[80%] text-center font-inter italic ">
           <Ticker />
         </div>
-      </div>
+      </div> */}
+
+
+<header className="sticky top-0 z-20">
+  {/* Navbar */}
+  <div className="flex items-center justify-between px-4 py-3 bg-white border-b">
+    <h1 className="text-lg font-semibold text-center flex-1">Dashboard Overview</h1>
+
+    <button
+      onClick={() => navigate("/my-profile")}
+      className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
+      aria-label="Open profile"
+    >
+      <img src={validProfilePic} alt="user" className="w-full h-full object-cover" />
+    </button>
+  </div>
+
+  {/* Ticker immediately under the navbar (sticky together) */}
+  <div className="w-full bg-white border-b flex justify-center items-center py-2">
+    <div className="max-w-[80%] text-center font-inter italic">
+      <Ticker />
+    </div>
+  </div>
+</header>
+
       {/* Stat cards */}
       <div className="grid grid-cols-2 gap-4 px-4 mt-4">
         <StatCard
