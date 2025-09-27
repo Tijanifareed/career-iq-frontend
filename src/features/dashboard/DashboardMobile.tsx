@@ -28,6 +28,8 @@ export default function DashboardMobile() {
   const { data: recent, isLoading: recentLoading } = useRecentApplications();
   const [fetching, setFetching] = React.useState(false);
   const loading = statsLoading || recentLoading;
+  
+      console.log("profile_picture in LS:", localStorage.getItem("profile_picture"));
 
   const handleRecentClick = async (id: number) => {
     try {
@@ -44,7 +46,14 @@ export default function DashboardMobile() {
       setFetching(false);
     }
   };
-  const profile_picture = localStorage.getItem("profile_picture") ?? "/default_profile.png";
+
+  const profilePic = localStorage.getItem("profile_picture");
+
+// Check for null, "null", or empty string
+const validProfilePic =
+  profilePic && profilePic !== "null" && profilePic.trim() !== ""
+    ? profilePic
+    : "/default_profile.png";
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pb-16">
@@ -58,7 +67,7 @@ export default function DashboardMobile() {
           className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
         >
           <img
-            src={profile_picture}
+            src={validProfilePic}
             alt="user"
             className="w-full h-full object-cover"
           />

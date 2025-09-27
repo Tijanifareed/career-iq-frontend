@@ -250,6 +250,14 @@ export default function InterviewDetailsWeb() {
           return () => mq.removeEventListener?.("change", handler);
      }, []);
 
+       const profilePic = localStorage.getItem("profile_picture");
+
+// Check for null, "null", or empty string
+const validProfilePic =
+  profilePic && profilePic !== "null" && profilePic.trim() !== ""
+    ? profilePic
+    : "/default_profile.png";
+
      // Custom styled input for datepicker
      const CustomInput = React.forwardRef<HTMLButtonElement, any>(
           ({ value, onClick, placeholder }, ref) => {
@@ -313,7 +321,7 @@ export default function InterviewDetailsWeb() {
                                    onClick={() => navigate("/my-profile")}
                                    className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
                               >
-                                   <img src={localStorage.getItem("profile_picture")??"/default_profile.png"} alt="user" className="w-full h-full object-cover" />
+                                   <img src={validProfilePic} alt="user" className="w-full h-full object-cover" />
                               </button>
                          </div>
                     </div>

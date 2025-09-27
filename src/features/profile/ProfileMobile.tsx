@@ -127,6 +127,14 @@ export default function ProfileMobile() {
           }
      };
 
+     const profilePic = localStorage.getItem("profile_picture");
+
+     // Check for null, "null", or empty string
+     const validProfilePic =
+          profilePic && profilePic !== "null" && profilePic.trim() !== ""
+               ? profilePic
+               : "/default_profile.png";
+
      if (loading) {
           return (
                <div className="flex items-center justify-center min-h-screen">
@@ -169,7 +177,7 @@ export default function ProfileMobile() {
                     {/* Avatar */}
                     <div className="relative">
                          <img
-                              src={user.profile_picture ?? "/default-avatar.png"}
+                              src={validProfilePic}
                               alt="avatar"
                               className={`w-32 h-32 rounded-full border object-cover ${uploading ? "opacity-60" : ""
                                    }`}

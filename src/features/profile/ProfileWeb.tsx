@@ -1,6 +1,6 @@
 // pages/ProfileWeb.tsx
 import React, { useEffect, useRef, useState } from "react";
-import { FaArrowLeft, FaPencilAlt, FaTrash, FaTimes} from "react-icons/fa";
+import { FaArrowLeft, FaPencilAlt, FaTrash, FaTimes } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import api from "../../apis/api";
@@ -55,6 +55,14 @@ export default function ProfileWeb() {
 
           fetchProfile();
      }, []);
+
+     const profilePic = localStorage.getItem("profile_picture");
+
+     // Check for null, "null", or empty string
+     const validProfilePic =
+          profilePic && profilePic !== "null" && profilePic.trim() !== ""
+               ? profilePic
+               : "/default_profile.png";
 
      // Save profile picture
      const saveProfilePicture = async (url: string) => {
@@ -165,7 +173,7 @@ export default function ProfileWeb() {
                {/* Content */}
                <div className="flex-1 flex flex-col md:pl-64">
                     {/* Navbar */}
-                   
+
                     <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-2 bg-white border-b shadow-sm">
                          {/* Left: Ticker */}
                          <div className="flex-1">
@@ -175,7 +183,7 @@ export default function ProfileWeb() {
                          {/* Right: Profile image */}
                          <div className="flex-shrink-0">
                               <img
-                                   src={user.profile_picture ?? "/default-avatar.png"}
+                                   src={validProfilePic}
                                    alt="user"
                                    className="w-9 h-9 rounded-full border object-cover"
                               />
@@ -192,7 +200,7 @@ export default function ProfileWeb() {
                                    {/* Avatar */}
                                    <div className="relative">
                                         <img
-                                             src={user.profile_picture ?? "/default-avatar.png"}
+                                             src={validProfilePic}
                                              alt="avatar"
                                              className={`w-32 h-32 rounded-full border object-cover ${uploading ? "opacity-60" : ""
                                                   }`}

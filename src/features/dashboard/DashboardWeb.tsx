@@ -51,6 +51,13 @@ export default function DashboardWeb() {
       setFetching(false);
     }
   };
+  const profilePic = localStorage.getItem("profile_picture");
+
+// Check for null, "null", or empty string
+const validProfilePic =
+  profilePic && profilePic !== "null" && profilePic.trim() !== ""
+    ? profilePic
+    : "/default_profile.png";
 
 
   return (
@@ -76,7 +83,7 @@ export default function DashboardWeb() {
             className="ml-4 w-9 h-9 rounded-full overflow-hidden border"
           >
             <img
-              src={localStorage.getItem("profile_picture")??"/default_profile.png"}
+              src={validProfilePic}
               alt="user"
               className="w-full h-full object-cover"
             />

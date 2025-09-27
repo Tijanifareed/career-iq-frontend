@@ -30,6 +30,14 @@ export default function ApplicationsWeb() {
     );
   }    
 
+    const profilePic = localStorage.getItem("profile_picture");
+
+// Check for null, "null", or empty string
+const validProfilePic =
+  profilePic && profilePic !== "null" && profilePic.trim() !== ""
+    ? profilePic
+    : "/default_profile.png";
+
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
@@ -86,7 +94,7 @@ export default function ApplicationsWeb() {
       className="w-9 h-9 rounded-full overflow-hidden border"
     >
       <img
-              src={localStorage.getItem("profile_picture")??"/public/default_profile.png"}
+              src={validProfilePic}
         alt="user"
         className="w-full h-full object-cover"
       />
