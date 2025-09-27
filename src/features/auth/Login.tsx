@@ -98,7 +98,7 @@ export default function Login() {
           </Button>
         </form>
         <DividerWithText text="Or" />
-        <GoogleSignInButton onClick={() => console.log("Google Sign-In clicked")} />
+        {/* <GoogleSignInButton onClick={() => console.log("Google Sign-In clicked")} /> */}
         <AuthFooter
           promptText="Don't have an account?"
           actionText="Sign Up"
