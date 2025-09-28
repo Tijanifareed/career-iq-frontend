@@ -17,7 +17,7 @@ export default function HeroSection() {
           </h1>
           <p className="text-base font-inter text-gray-600 mb-8">
             Track your applications and optimize your resume with AI feedback
-            <br /> so you can get hired faster.
+            <br /> the first step towards your complete career companion.
           </p>
 
           {/* Buttons */}
