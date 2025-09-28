@@ -37,7 +37,7 @@ export default function LandingNavbar() {
           onClick={() => navigate("/login")}
           className="px-3 sm:px-5 py-1.5 sm:py-2 border border-gray-300 rounded-md text-xs sm:text-sm text-gray-700 font-inter hover:bg-gray-100 transition"
         >
-          Log in
+          Sign in
         </button>
       </div>
     </nav>

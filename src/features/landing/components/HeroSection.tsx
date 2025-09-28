@@ -26,7 +26,7 @@ export default function HeroSection() {
     onClick={() => navigate("/signup")}
     className="min-w-[180px] px-6 py-3 bg-customBlue text-white text-sm rounded-md font-inter hover:bg-blue-400 transition"
   >
-    Sign Up for Free!!
+    Get started!
   </button>
   <button
     onClick={() => navigate("/login")}
