@@ -44,8 +44,7 @@ export default function ProfileWeb() {
                try {
                     setLoading(true);
                     const res = await api.get("/users/user-profile");
-                    localStorage.removeItem("profile_picture");
-                    localStorage.setItem("profile_picture", res.data.profile_picture);
+                    localStorage.setItem("profile_picture", res.data.data.profile_picture);
                     setUser(res.data?.data ?? res.data);
                } catch (err) {
                     console.error("Failed to fetch profile", err);
