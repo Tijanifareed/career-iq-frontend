@@ -44,6 +44,8 @@ export default function ProfileWeb() {
                try {
                     setLoading(true);
                     const res = await api.get("/users/user-profile");
+                    localStorage.removeItem("profile_picture");
+                    localStorage.setItem("profile_picture", res.data.profile_picture);
                     setUser(res.data?.data ?? res.data);
                } catch (err) {
                     console.error("Failed to fetch profile", err);
@@ -71,7 +73,7 @@ export default function ProfileWeb() {
                const newUser: User = res.data?.user ?? res.data;
                setUser(newUser);
                localStorage.removeItem("profile_picture")
-               localStorage.setItem("profile_picture", newUser.profile_picture ?? "/default_profile.png");
+               localStorage.setItem("profile_picture", newUser.profile_picture ?? "");
           } catch (err) {
                console.error("Error saving profile picture", err);
                alert("Could not update profile picture.");

@@ -41,6 +41,8 @@ export default function ProfileMobile() {
                     setLoading(true);
                     const res = await api.get("/users/user-profile");
                     setUser(res.data?.data ?? res.data);
+                    localStorage.removeItem("profile_picture");
+                    localStorage.setItem("profile_picture", user?.profile_picture ?? res.data.profile_picture);
                } catch (err) {
                     console.error("Failed to fetch profile", err);
                } finally {
@@ -58,7 +60,7 @@ export default function ProfileMobile() {
                setUser(newUser);
                localStorage.setItem(
                     "profile_picture",
-                    newUser.profile_picture ?? "/default_profile.png"
+                    newUser.profile_picture ?? ""
                );
           } catch (err) {
                console.error("Error saving profile picture", err);
